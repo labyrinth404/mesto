@@ -3,3 +3,11 @@
     margin: 0;
     align-self: center;
 }
+
+@media screen and (min-width: 321px) {
+    .profile__edit-button {
+        width: 24px;
+        align-self: end;
+        margin-bottom: 8px;
+    }
+}

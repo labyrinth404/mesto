@@ -5,3 +5,10 @@
     grid-template-columns: 1fr auto;
     row-gap: 8px;
 }
+
+@media screen and (min-width: 321px) {
+    .profile__info {
+        margin: 0 30px;
+        max-width: 336px;
+    }
+}
