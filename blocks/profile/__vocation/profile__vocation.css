@@ -1,0 +1,6 @@
+.profile__vocation {
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 17px;
+    grid-column: 1/3;
+}
