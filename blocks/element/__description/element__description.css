@@ -1,0 +1,6 @@
+.element__description {
+    background-color: white;
+    color: black;
+    border-radius: 5%;
+    display: grid;
+}
