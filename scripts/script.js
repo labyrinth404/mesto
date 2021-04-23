@@ -22,3 +22,33 @@ function formSubmitHandler(evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 */
+let popup = document.querySelector('.popup'),
+    popupButtonClose = popup.querySelector('.popup__button-close'),
+    popupButtonSave = popup.querySelector('.popup__button-save');
+
+let profileInfo = document.querySelector('.profile__info'),
+    profileName = profileInfo.querySelector('.profile__name'),
+    profileDescription = profileInfo.querySelector('.profile__description'),
+    profileButtonEdit = profileInfo.querySelector('.profile__button-edit');
+
+console.log(popupName.value);
+
+function closePopup() {
+    popup.classList.remove('popup_opened');
+}
+
+function openPopup() {
+    popup.classList.add('popup_opened');
+}
+
+function saveProfile() {
+    let popupName = popup.querySelector('.popup__name'),
+        popupDescription = popup.querySelector('.popup__description');
+
+    popupName.value;
+    popupDescription.value;
+
+}
+profileButtonEdit.addEventListener('click', openPopup);
+popupButtonClose.addEventListener('click', closePopup);
+popupButtonSave.addEventListener('click', saveProfile);
