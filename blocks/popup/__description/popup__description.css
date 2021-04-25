@@ -1,9 +1,22 @@
 .popup__description {
-    width: 358px;
-    margin: 0 36px;
-    border-right: 1px solid #000;
-    font-size: 14px;
-    line-height: 17px;
+    margin: 0 22px;
+    width: 238px;
     border: none;
     border-bottom: 1px solid grey;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (min-width: 321px) {
+    .popup__description {
+        width: 88%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .popup__description {
+        width: 358px;
+        margin: 0 36px;
+    }
 }

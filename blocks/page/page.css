@@ -5,7 +5,7 @@
     min-width: 320px;
 }
 
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 769px) {
     .page {
         max-width: 880px;
         margin: 0 auto;

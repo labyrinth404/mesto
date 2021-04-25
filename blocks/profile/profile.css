@@ -6,6 +6,12 @@
 
 @media screen and (min-width: 321px) {
     .profile {
+        margin: 42px auto 36px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .profile {
         margin: 40px 0 51px;
         text-align: left;
         display: grid;

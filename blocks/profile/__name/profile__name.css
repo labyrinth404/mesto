@@ -6,7 +6,7 @@
     text-align: right;
 }
 
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 769px) {
     .profile__name {
         font-size: 42px;
         line-height: 48px;

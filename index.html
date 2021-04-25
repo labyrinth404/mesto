@@ -15,12 +15,14 @@
     </header>
     <section class="popup">
         <div class="popup__container">
-            <input tupe="submit" class="popup__button-close">
+            <button tupe="submit" class="popup__button-close">
+                <img src="images/close-button.svg">
+            </button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="test" method="post">
                 <input type="text" value="Жак-ив Кусто" class="popup__name">
                 <input type="text" value="Иследователь океана" class="popup__description">
-                <input type="submit" value="Сохранить" class="popup__button-save">
+                <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
         </div>
     </section>
@@ -30,10 +32,14 @@
             <img src="./images/avatar_kusto.jpg" class="profile__avatar" alt="Аватарка">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <input type="submit" class="profile__button-edit">
+                <button type="submit" class="profile__button-edit">
+                    <img src="images/edit-button.svg" alt="Редактировать">
+                </button>
                 <p class="profile__description">Исследователь океана</p>
             </div>
-            <img src="./images/add-button.svg" alt="Добавить" class="profile__button-add">
+            <button type="submit" class="profile__button-add">
+                <img src="images/add-button.svg">
+            </button>
         </section>
 
         <section class="elements">
