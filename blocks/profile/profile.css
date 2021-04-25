@@ -4,17 +4,18 @@
     text-align: center;
 }
 
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 786px) {
     .profile {
         margin: 42px auto 36px;
+        display: grid;
+        grid-template-columns: 120px 1fr 120px;
     }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 906px) {
     .profile {
         margin: 40px 0 51px;
         text-align: left;
-        display: grid;
         grid-template-columns: 120px repeat(2, auto);
         width: 880px;
     }
