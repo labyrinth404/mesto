@@ -5,23 +5,16 @@
     background-color: black;
     border-radius: 3px;
     transition: .666s opacity ease-in-out;
-    margin-top: 45px;
+    margin: 45px auto 25px;
     max-width: 238px;
     width: 100%;
     height: 46px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    font-size: 14px;
+    line-height: 17px;
 }
 
 .popup__button-save:hover {
     opacity: 80%;
-}
-
-@media screen and (min-width: 321px) {
-    .popup__button-save {
-        max-width: 85%;
-    }
 }
 
 @media screen and (min-width: 769px) {

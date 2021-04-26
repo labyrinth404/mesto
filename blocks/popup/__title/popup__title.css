@@ -5,7 +5,7 @@
     font-weight: 900;
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 769px) {
     .popup__title {
         margin: 34px 64px 54px 36px;
         font-size: 24px;

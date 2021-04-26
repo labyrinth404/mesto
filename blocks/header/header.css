@@ -1,8 +1,7 @@
 .header {
     margin-top: 28px;
     padding-left: 27px;
-    border-bottom: 1px solid #545454;
-    min-height: 56px;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (min-width: 769px) {
@@ -14,7 +13,6 @@
 
 @media screen and (min-width: 940px) {
     .header {
-        min-height: 74px;
         padding-left: 0;
     }
 }

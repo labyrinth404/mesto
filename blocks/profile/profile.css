@@ -14,7 +14,7 @@
 
 @media screen and (min-width: 906px) {
     .profile {
-        margin: 40px 0 51px;
+        margin: 37px 0 51px;
         text-align: left;
         grid-template-columns: 120px repeat(2, auto);
         width: 880px;

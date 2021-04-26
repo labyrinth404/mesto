@@ -7,13 +7,6 @@
     line-height: 17px;
 }
 
-@media screen and (min-width: 321px) {
-    .popup__name {
-        width: 88%;
-        margin: 0 auto 30px;
-    }
-}
-
 @media screen and (min-width: 769px) {
     .popup__name {
         width: 358px;
