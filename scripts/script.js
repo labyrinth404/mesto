@@ -16,13 +16,10 @@ function formSubmitHandler(evt) {
 
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
-    closePopup();
-
-}
-
-function closePopup() {
     popup.classList.remove('popup_opened');
+
 }
+
 
 function openPopup() {
     popup.classList.add('popup_opened');
@@ -30,6 +27,6 @@ function openPopup() {
 
 
 
-formElement.addEventListener('submit', formSubmitHandler);
+popupButtonSave.addEventListener('click', formSubmitHandler);
+popupButtonClose.addEventListener('click', formSubmitHandler);
 profileButtonEdit.addEventListener('click', openPopup);
-popupButtonClose.addEventListener('click', closePopup);
