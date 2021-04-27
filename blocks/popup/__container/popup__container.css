@@ -1,5 +1,5 @@
 .popup__container {
-    margin: calc(50vh - 320px) auto;
+    margin: auto auto;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #000;
