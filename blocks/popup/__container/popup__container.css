@@ -11,7 +11,6 @@
 
 @media screen and (min-width: 490px) {
     .popup__container {
-        margin-top: calc(50vh - 165px);
         min-width: 430px;
         width: 100%;
     }
