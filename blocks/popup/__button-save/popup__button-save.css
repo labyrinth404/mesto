@@ -5,7 +5,7 @@
     background-color: black;
     border-radius: 3px;
     transition: .666s opacity ease-in-out;
-    margin: 45px auto 25px;
+    margin: 45px 22px 25px;
     max-width: 238px;
     width: 100%;
     height: 46px;
@@ -17,7 +17,7 @@
     opacity: 80%;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 490px) {
     .popup__button-save {
         margin: 48px 36px;
         min-width: 358px;
