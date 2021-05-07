@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto** Russia</title>
 </head>
+<!--Попап-->
 
 <body class="page">
     <header class="header">
@@ -19,12 +20,25 @@
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="test" method="post">
+            <form name="popupEditInformation" method="post">
                 <input type="text" value="Жак-ив Кусто" class="popup__input" name="popup-name-form">
                 <input type="text" value="Иследователь океана" class="popup__input" name="popup-description-form">
                 <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
-            
+        </div>
+    </section>
+    <!--Форма добавления фотографий-->
+    <section class="form">
+        <div class="form__container">
+            <button type="button" class="form__button-close">
+                <img src="images/close-button.svg" alt="Закрыть">
+            </button>
+            <h2 class="form__title">Новое место</h2>
+            <form name="formAddImage" method="post">
+                <input type="text" placeholder="Название" class="form__input" name="mesto-name-form">
+                <input type="text" placeholder="Ссылка на картинку" class="form__input" name="mest-url-form">
+                <button type="submit" class="form__button-save">Сохранить</button>
+            </form>
         </div>
     </section>
 
