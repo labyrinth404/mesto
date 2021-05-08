@@ -36,7 +36,7 @@
             <h2 class="form__title">Новое место</h2>
             <form name="formAddImage" method="post">
                 <input type="text" placeholder="Название" class="form__input" name="mesto-name-form">
-                <input type="text" placeholder="Ссылка на картинку" class="form__input" name="mest-url-form">
+                <input type="text" placeholder="Ссылка на картинку" class="form__input" name="mesto-url-form">
                 <button type="submit" class="form__button-save">Сохранить</button>
             </form>
         </div>
@@ -48,7 +48,7 @@
             <button type="button" class="popup-image__button-close">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
-            <img src="https://images.unsplash.com/photo-1615190394546-d8ae7eb94919?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" class="popup-image__image" alt="Картинка элемента">
+            <img src="https://images.unsplash.com/uploads/141327328038701afeede/eda0fb7c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" class="popup-image__image" alt="Картинка элемента">
             <h2 class="popup-image__title">Карачаево-Черкесия</h2>
         </div>
     </section>
@@ -71,49 +71,17 @@
         </section>
 
         <section class="elements">
-            <div class="element">
-                <div class="element__description">
-                    <img src="https://images.unsplash.com/photo-1615190394546-d8ae7eb94919?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" class="element__image" alt="Картинка элемента">
-                    <button type="button" class="element__trash"></button>
-                    <h2 class="element__text">Карачаевск</h2>
-                    <button type="button" class="element__like"></button>
+            <!--Шаблончик-->
+            <template id="element">
+                <div class="element">
+                    <div class="element__description">
+                        <img src="https://127.0.0.1" class="element__image" alt="Картинка элемента">
+                        <button type="button" class="element__trash"></button>
+                        <h2 class="element__text">текст</h2>
+                        <button type="button" class="element__like"></button>
+                    </div>
                 </div>
-            </div>
-            <div class="element">
-                <div class="element__description">
-                    <img src="./images/kirill-pershin-1404681-unsplash.jpg" class="element__image" alt="Картинка элемента">
-                    <h2 class="element__text">Гора Эльбрус</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <div class="element__description">
-                    <img src="./images/kirill-pershin-1556355-unsplash.jpg" class="element__image" alt="Картинка элемента">
-                    <h2 class="element__text">Домбай</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <div class="element__description">
-                    <img src="./images/kirill-pershin-1404681-unsplash.jpg" class="element__image" alt="Картинка элемента">
-                    <h2 class="element__text">Гора Эльбрус</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <div class="element__description">
-                    <img src="./images/kirill-pershin-1556355-unsplash.jpg" class="element__image" alt="Картинка элемента">
-                    <h2 class="element__text">Домбай</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-            </div>
-            <div class="element">
-                <div class="element__description">
-                    <img src="./images/kirill-pershin-1088404-unsplash.jpg" class="element__image" alt="Картинка элемента">
-                    <h2 class="element__text">Карачаево-Черкесия</h2>
-                    <button type="button" class="element__like"></button>
-                </div>
-            </div>
+            </template>
 
         </section>
 
