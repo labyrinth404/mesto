@@ -1,0 +1,22 @@
+.popup-image__button-close {
+    border: transparent;
+    position: absolute;
+    right: -10px;
+    top: -60px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .666s opacity ease-in-out;
+}
+
+.popup-image__button-close:hover {
+    opacity: 60%;
+}
+
+@media screen and (min-width: 769px) {
+    .popup-image__button-close {
+        width: 58px;
+        height: 58px;
+        right: -49px;
+        top: -49px;
+    }
+}

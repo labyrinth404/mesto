@@ -1,0 +1,10 @@
+.popup-image__container {
+    margin: auto auto;
+    max-width: auto;
+    position: relative;
+    object-fit: contain;
+}
+
+@media screen and (min-width: 490px) {
+    .popup-image__container {}
+}

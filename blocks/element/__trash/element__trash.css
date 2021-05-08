@@ -1,0 +1,20 @@
+.element__trash {
+    width: 18px;
+    height: 19px;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    align-self: start;
+    margin-right: 15px;
+    justify-self: center;
+    transition: .666s opacity ease-out;
+    border: transparent;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: url(../../../images/trash.svg);
+    margin: 18px 15px 0 0;
+    z-index: 1;
+}
+
+.element__trash:hover {
+    opacity: 50%;
+    cursor: pointer;
+}

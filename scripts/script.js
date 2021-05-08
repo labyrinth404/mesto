@@ -1,3 +1,29 @@
+const initialCards = [{
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
 let popupElement = document.querySelector('.popup__container')
 let nameInput = popupElement.querySelector('[name="popup-name-form"]');
 let jobInput = popupElement.querySelector('[name="popup-description-form"]');
@@ -18,6 +44,8 @@ let profileInfo = document.querySelector('.profile'),
     profileDescription = profileInfo.querySelector('.profile__description'),
     profileButtonEdit = profileInfo.querySelector('.profile__button-edit'),
     profileButtonAdd = profileInfo.querySelector('.profile__button-add');
+
+let elements = document.querySelector('.elements');
 
 function formSubmitHandler(evt) {
     evt.preventDefault();

@@ -7,9 +7,9 @@
     line-height: 17px;
     padding-bottom: 13px;
 }
-.popup__input:last-child {
-    margin-bottom: 0;
 
+.popup__input:nth-child(2) {
+    margin-bottom: 0;
 }
 
 @media screen and (min-width: 490px) {
