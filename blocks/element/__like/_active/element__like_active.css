@@ -1,4 +1,7 @@
-.element__like {
+.element__like_active {
+    background-image: url(../../../../images/heart-active.svg);
+    background-size: contain;
+    opacity: 100%;
     width: 22px;
     height: 19px;
     grid-column: 2/3;
@@ -9,10 +12,4 @@
     transition: .666s opacity ease-out;
     border: transparent;
     background-color: transparent;
-    background-image: url(../../../images/heart.svg);
-}
-
-.element__like:hover {
-    opacity: 50%;
-    cursor: pointer;
 }

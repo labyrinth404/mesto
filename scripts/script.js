@@ -24,9 +24,6 @@ const initialCards = [{
     }
 ];
 
-
-
-
 let popupElement = document.querySelector('.popup__container')
 let nameInput = popupElement.querySelector('[name="popup-name-form"]');
 let jobInput = popupElement.querySelector('[name="popup-description-form"]');
@@ -49,18 +46,20 @@ let profileInfo = document.querySelector('.profile'),
     profileButtonAdd = profileInfo.querySelector('.profile__button-add');
 
 let elements = document.querySelector('.elements'),
+    element = elements.querySelector('.element'),
     elementTemplate = elements.querySelector('#element').content;
 
+let elementTrash = elements.querySelectorAll('.element__trash');
+
+let fullImage = document.querySelector('.popup-image'),
+    fullImageButtonClose = fullImage.querySelector('.popup-image__button-close');
 
 function popupSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
     closePopup();
-
 }
-
-
 
 function openPopup() {
     nameInput.value = profileName.textContent;
@@ -95,9 +94,7 @@ function formSubmitHandler(evt) {
     elements.prepend(newElement);
 
     closeForm();
-
 }
-
 
 function listCardsView() {
     for (let i = 0; i < initialCards.length; i++) {
@@ -108,8 +105,30 @@ function listCardsView() {
     }
 }
 
-function addListCard() {
-    return null
+function deleteListCard(e) {
+    let obje = e.closest(".element");
+    obje.remove();
+}
+
+function likeStatus(e) {
+    e.classList.length === 1 ? e.classList.add('element__like_active') : e.classList.remove('element__like_active');
+}
+
+function openingImage(e) {
+    let image = fullImage.querySelector('.popup-image__image'),
+        title = fullImage.querySelector('.popup-image__title'),
+        obje = e.closest(".element__description");
+
+    title.textContent = obje.querySelector('.element__text').textContent;
+    image.src = obje.querySelector('.element__image').src;
+
+    fullImage.classList.add('popup-image_opened');
+}
+
+
+
+function closeImagePopup() {
+    fullImage.classList.remove('popup-image_opened');
 }
 
 popupElement.addEventListener('submit', popupSubmitHandler);
@@ -121,4 +140,8 @@ profileButtonEdit.addEventListener('click', openPopup);
 
 formButtonCLose.addEventListener('click', closeForm);
 profileButtonAdd.addEventListener('click', openForm);
+
+fullImageButtonClose.addEventListener('click', closeImagePopup);
+
+
 listCardsView();

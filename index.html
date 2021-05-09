@@ -48,8 +48,8 @@
             <button type="button" class="popup-image__button-close">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
-            <img src="https://images.unsplash.com/uploads/141327328038701afeede/eda0fb7c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" class="popup-image__image" alt="Картинка элемента">
-            <h2 class="popup-image__title">Карачаево-Черкесия</h2>
+            <img src="https://127.0.0.1" class="popup-image__image" alt="Картинка элемента">
+            <h2 class="popup-image__title">Текст</h2>
         </div>
     </section>
 
@@ -75,10 +75,10 @@
             <template id="element">
                 <div class="element">
                     <div class="element__description">
-                        <img src="https://127.0.0.1" class="element__image" alt="Картинка элемента">
-                        <button type="button" class="element__trash"></button>
+                        <img src="https://127.0.0.1" class="element__image" alt="Картинка элемента" onclick="openingImage(this)" >
+                        <button type="button" class="element__trash" onclick="deleteListCard(this)"></button>
                         <h2 class="element__text">текст</h2>
-                        <button type="button" class="element__like"></button>
+                        <button type="button" class="element__like" onclick="likeStatus(this)"></button>
                     </div>
                 </div>
             </template>
