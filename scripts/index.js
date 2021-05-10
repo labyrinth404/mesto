@@ -31,7 +31,7 @@ const profilePopup = document.querySelector('.popup-profile'),
     profilePopupButtonClose = document.querySelector('.popup__button-close_profile');
 
 const addCardPopup = document.querySelector('.popup-add-card'),
-    addCardPopupButtonClose = addCardPopup.querySelector('.popup__button-clos_add-card'),
+    addCardPopupButtonClose = addCardPopup.querySelector('.popup__button-close_add-card'),
     popupAddCardContainer = addCardPopup.querySelector('.popup__container_add-card'),
     nameForm = addCardPopup.querySelector('[name="mesto-name-form"]'),
     urlForm = addCardPopup.querySelector('[name="mesto-url-form"');
