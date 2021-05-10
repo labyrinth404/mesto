@@ -25,14 +25,14 @@ const initialCards = [{
 ];
 
 const profilePopup = document.querySelector('.popup-profile'),
-    popupElement = document.querySelector('.popup-profile_container'),
+    popupElement = document.querySelector('.popup__container_profile'),
     nameInput = popupElement.querySelector('[name="popup-name-form"]'),
     jobInput = popupElement.querySelector('[name="popup-description-form"]'),
-    profilePopupButtonClose = document.querySelector('.popup-profile_close');
+    profilePopupButtonClose = document.querySelector('.popup__button-close_profile');
 
 const addCardPopup = document.querySelector('.popup-add-card'),
-    addCardPopupButtonClose = addCardPopup.querySelector('.popup-add-card_close'),
-    popupAddCardContainer = addCardPopup.querySelector('.popup-add-card_container'),
+    addCardPopupButtonClose = addCardPopup.querySelector('.popup__button-clos_add-card'),
+    popupAddCardContainer = addCardPopup.querySelector('.popup__container_add-card'),
     nameForm = addCardPopup.querySelector('[name="mesto-name-form"]'),
     urlForm = addCardPopup.querySelector('[name="mesto-url-form"');
 

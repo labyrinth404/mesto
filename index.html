@@ -19,9 +19,9 @@
 
 
     <!--Попап профиля. Редактирование данных.-->
-    <section class="popup popup-profile">
-        <div class="popup__container popup-profile_container">
-            <button type="button" class="popup__button-close popup-profile_close">
+    <section class="popup popup_profile">
+        <div class="popup__container popup__container_profile">
+            <button type="button" class="popup__button-close popup__button-close_profile">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -34,15 +34,15 @@
     </section>
     <!--Попап фотографий(мест). Добавление названия места и URL ссылка на изображение.-->
     <section class="popup popup-add-card">
-        <div class="popup__container popup-add-card_container">
-            <button type="button" class="popup__button-close popup-add-card_close">
+        <div class="popup__container popup__container_add-card">
+            <button type="button" class="popup__button-close popup__button-close_add-card">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
             <h2 class="popup__title">Новое место</h2>
             <form name="popupEditInformation" method="post" class="popup__form">
-                <input type="text" placeholder="Название" class=" popup__input form__input" name="mesto-name-form">
-                <input type="text" placeholder="Ссылка на картинку" class="popup__input form__input" name="mesto-url-form">
-                <button type="submit" class="popup__button-save popup-add-card_save">Сохранить</button>
+                <input type="text" placeholder="Название" class="popup__input" name="mesto-name-form">
+                <input type="text" placeholder="Ссылка на картинку" class="popup__input" name="mesto-url-form">
+                <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
         </div>
     </section>
