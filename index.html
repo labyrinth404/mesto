@@ -14,47 +14,49 @@
     <header class="header">
         <img src="./images/logo-mesto.svg" class="header__logo" alt="Логотип">
     </header>
-    <section class="popup">
-        <div class="popup__container">
-            <button type="button" class="popup__button-close">
+    <!--Попапы-->
+
+
+
+    <!--Попап профиля. Редактирование данных.-->
+    <section class="popup popup-profile">
+        <div class="popup__container popup-profile_container">
+            <button type="button" class="popup__button-close popup-profile_close">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="popupEditInformation" method="post">
+            <form name="popupEditInformation" method="post" class="popup__form">
                 <input type="text" value="Жак-ив Кусто" class="popup__input" name="popup-name-form">
                 <input type="text" value="Иследователь океана" class="popup__input" name="popup-description-form">
                 <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
         </div>
     </section>
-    <!--Форма добавления фотографий-->
-    <section class="form">
-        <div class="form__container">
-            <button type="button" class="form__button-close">
+    <!--Попап фотографий(мест). Добавление названия места и URL ссылка на изображение.-->
+    <section class="popup popup-add-card">
+        <div class="popup__container popup-add-card_container">
+            <button type="button" class="popup__button-close popup-add-card_close">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
-            <h2 class="form__title">Новое место</h2>
-            <form name="formAddImage" method="post">
-                <input type="text" placeholder="Название" class="form__input" name="mesto-name-form">
-                <input type="text" placeholder="Ссылка на картинку" class="form__input" name="mesto-url-form">
-                <button type="submit" class="form__button-save">Сохранить</button>
+            <h2 class="popup__title">Новое место</h2>
+            <form name="popupEditInformation" method="post" class="popup__form">
+                <input type="text" placeholder="Название" class=" popup__input form__input" name="mesto-name-form">
+                <input type="text" placeholder="Ссылка на картинку" class="popup__input form__input" name="mesto-url-form">
+                <button type="submit" class="popup__button-save popup-add-card_save">Сохранить</button>
             </form>
         </div>
     </section>
-
-    <!--Попап для фотографий-->
-    <section class="popup-image">
+    <!--Попап отображения полноразмерных фотографий.-->
+    <section class="popup popup-image">
         <div class="popup-image__container">
-            <button type="button" class="popup-image__button-close">
+            <button type="button" class="popup__button-close popup-image__button-close">
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
-            <img src="https://127.0.0.1" class="popup-image__image" alt="Картинка элемента">
-            <h2 class="popup-image__title">Текст</h2>
+            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" class="popup-image__image" alt="Картинка элемента">
+            <h2 class="popup-image__title">Иваново</h2>
         </div>
     </section>
-
-
-
+    <!--Основная часть страницы.-->
     <main class="main">
         <section class="profile">
             <img src="./images/avatar_kusto.jpg" class="profile__avatar" alt="Аватарка">
@@ -69,28 +71,26 @@
                 <img src="images/add-button.svg" alt="Добавить">
             </button>
         </section>
-
+        <!--Набор карточек с изображением мест.-->
         <section class="elements">
-            <!--Шаблончик-->
+            <!--Шаблон карточки с изображением места.-->
             <template id="element">
                 <div class="element">
                     <div class="element__description">
-                        <img src="https://127.0.0.1" class="element__image" alt="Картинка элемента" onclick="openingImage(this)" >
-                        <button type="button" class="element__trash" onclick="deleteListCard(this)"></button>
+                        <img src="https://127.0.0.1" class="element__image" alt="Картинка элемента">
+                        <button type="button" class="element__trash"></button>
                         <h2 class="element__text">текст</h2>
-                        <button type="button" class="element__like" onclick="likeStatus(this)"></button>
+                        <button type="button" class="element__like"></button>
                     </div>
                 </div>
             </template>
-
         </section>
-
     </main>
-
+    <!--Подвал страницы.-->
     <footer class="footer">
         <p class="footer__copyright">&COPY; 2021 Коврига Богдан</p>
     </footer>
-    <script src='./scripts/script.js'></script>
+    <script src='./scripts/index.js'></script>
 </body>
 
 </html>
