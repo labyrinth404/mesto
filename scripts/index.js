@@ -45,7 +45,10 @@ const profileInfo = document.querySelector('.profile'),
 const elements = document.querySelector('.elements'),
     elementTemplate = elements.querySelector('#element').content;
 
-const fullImageButtonClose = document.querySelector('.popup-image__button-close');
+const fullImageButtonClose = document.querySelector('.popup-image__button-close'),
+    fullImage = document.querySelector('.popup-image'),
+    image = fullImage.querySelector('.popup-image__image'),
+    title = fullImage.querySelector('.popup-image__title');
 
 
 
@@ -58,24 +61,7 @@ function popupSubmitHandler(evt) {
 }
 
 function openPopup(popup) {
-    if (popup.classList == 'profile__button-edit' || popup.alt == 'Редактировать') {
-        nameInput.value = profileName.textContent;
-        jobInput.value = profileDescription.textContent;
-        profilePopup.classList.add('popup_opened');
-
-    } else if (popup.classList == 'profile__button-add' || popup.alt == 'Добавить') {
-        addCardPopup.classList.add('popup_opened');
-
-    } else if (popup.classList == 'element__image') {
-        const fullImage = document.querySelector('.popup-image'),
-            image = fullImage.querySelector('.popup-image__image'),
-            title = fullImage.querySelector('.popup-image__title'),
-            object = popup.closest(".element__description");
-
-        title.textContent = object.querySelector('.element__text').textContent;
-        image.src = object.querySelector('.element__image').src;
-        fullImage.classList.add('popup_opened');
-    }
+    popup.classList.add('popup_opened');
 }
 
 function closePopup(element) {
@@ -93,6 +79,7 @@ function formSubmitHandler(evt) {
 
 function createCard(name, url) {
     const newElement = elementTemplate.querySelector('.element').cloneNode(true),
+        descriptioElement = newElement.querySelector('.element__description'),
         deleteElement = newElement.querySelector('.element__trash'),
         likeElemenent = newElement.querySelector('.element__like'),
         imageElement = newElement.querySelector('.element__image'),
@@ -103,7 +90,9 @@ function createCard(name, url) {
     textElement.textContent = name;
 
     imageElement.addEventListener('click', () => {
-        openPopup(imageElement);
+        title.textContent = descriptioElement.querySelector('.element__text').textContent;
+        image.src = descriptioElement.querySelector('.element__image').src;
+        openPopup(fullImage);
     });
 
     deleteElement.addEventListener('click', () => {
@@ -128,8 +117,12 @@ listCardsView();
 popupElement.addEventListener('submit', popupSubmitHandler);
 popupAddCardContainer.addEventListener('submit', formSubmitHandler);
 
-profileButtonEdit.addEventListener('click', (e) => { openPopup(e.target) });
-profileButtonAdd.addEventListener('click', (e) => { openPopup(e.target) });
+profileButtonEdit.addEventListener('click', () => {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileDescription.textContent;
+    openPopup(profilePopup)
+});
+profileButtonAdd.addEventListener('click', () => { openPopup(addCardPopup) });
 
 profilePopupButtonClose.addEventListener('click', () => { closePopup(profilePopupButtonClose.closest('.popup')) });
 addCardPopupButtonClose.addEventListener('click', () => { closePopup(addCardPopupButtonClose.closest('.popup')) });
