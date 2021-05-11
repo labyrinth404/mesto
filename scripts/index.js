@@ -24,7 +24,7 @@ const initialCards = [{
     }
 ];
 
-const profilePopup = document.querySelector('.popup-profile'),
+const profilePopup = document.querySelector('.popup_profile'),
     popupElement = document.querySelector('.popup__container_profile'),
     nameInput = popupElement.querySelector('[name="popup-name-form"]'),
     jobInput = popupElement.querySelector('[name="popup-description-form"]'),
