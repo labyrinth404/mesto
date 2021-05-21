@@ -127,3 +127,5 @@ profileButtonAdd.addEventListener('click', () => { openPopup(addCardPopup) });
 profilePopupButtonClose.addEventListener('click', () => { closePopup(profilePopup) });
 addCardPopupButtonClose.addEventListener('click', () => { closePopup(addCardPopup) });
 fullImageButtonClose.addEventListener('click', () => { closePopup(fullImage) });
+
+enableValidation();
