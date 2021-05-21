@@ -66,6 +66,7 @@ function openPopup(popup) {
 
 function closePopup(element) {
     element.classList.remove('popup_opened');
+
 }
 
 function formSubmitHandler(evt) {
@@ -79,7 +80,6 @@ function formSubmitHandler(evt) {
 
 function createCard(name, url) {
     const newElement = elementTemplate.querySelector('.element').cloneNode(true),
-        descriptioElement = newElement.querySelector('.element__description'),
         deleteElement = newElement.querySelector('.element__trash'),
         likeElemenent = newElement.querySelector('.element__like'),
         imageElement = newElement.querySelector('.element__image'),
@@ -128,4 +128,9 @@ profilePopupButtonClose.addEventListener('click', () => { closePopup(profilePopu
 addCardPopupButtonClose.addEventListener('click', () => { closePopup(addCardPopup) });
 fullImageButtonClose.addEventListener('click', () => { closePopup(fullImage) });
 
-enableValidation();
+window.addEventListener('keydown', (e) => {
+    const popupOpened = document.querySelector('.popup_opened');
+    if (e.key === 'Escape') {
+        closePopup(popupOpened);
+    }
+});

@@ -17,6 +17,12 @@
     opacity: 80%;
 }
 
+.popup__button-save:disabled {
+    background-color: white;
+    color: black;
+    opacity: 20%;
+}
+
 @media screen and (min-width: 490px) {
     .popup__button-save {
         margin: 48px 36px;
