@@ -9,18 +9,19 @@ const toggleButtonSave = (buttonElement, inputList) => {
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
-    inputElement.classList.remove('form__input-type_error');
-    errorElement.classList.remove('.form__input-error_active');
+    inputElement.classList.remove('popup__input-error');
+    errorElement.classList.remove('.popup__input_active');
     errorElement.textContent = '';
+
 
 };
 
 const showInputError = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`${inputElement.id}-error`);
+    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
-    inputElement.classList.add('.form__input-type_error');
+    inputElement.classList.add('.popup__input-error');
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add('.form__input-error_active');
+    errorElement.classList.add('.popup__input_active');
 };
 
 const checkInputValidity = (inputElement) => {
