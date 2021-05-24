@@ -1,6 +1,6 @@
 .popup__button-save {
     cursor: pointer;
-    border: none;
+    border-color: black;
     color: white;
     background-color: black;
     border-radius: 3px;
@@ -21,6 +21,8 @@
     background-color: white;
     color: black;
     opacity: 20%;
+    border-color: black;
+    cursor: default;
 }
 
 @media screen and (min-width: 490px) {

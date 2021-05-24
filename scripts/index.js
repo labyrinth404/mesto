@@ -61,7 +61,15 @@ function popupSubmitHandler(evt) {
 }
 
 function openPopup(popup) {
+    nameForm.value = '';
+    urlForm.value = '';
     popup.classList.add('popup_opened');
+    const popupOpened = document.querySelector('.popup_opened');
+    popupOpened.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            closePopup(popupOpened);
+        }
+    });
 }
 
 function closePopup(element) {
@@ -134,3 +142,5 @@ window.addEventListener('keydown', (e) => {
         closePopup(popupOpened);
     }
 });
+
+enableValidation();

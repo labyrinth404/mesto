@@ -1,0 +1,15 @@
+.popup-error {
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    margin: 5px 36px 13px;
+    width: 238px;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 490px) {
+    .popup-error {
+        width: 358px;
+    }
+}

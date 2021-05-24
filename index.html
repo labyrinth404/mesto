@@ -22,7 +22,7 @@
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="popupEditInformation" method="post" class="popup__form">
+            <form name="popupEditInformation" method="post" class="popup__form" novalidate>
                 <input required type="text" value="Жак-ив Кусто" class="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40">
                 <span class="popup-error" id="popupName-error"></span>
                 <input required type="text" value="Иследователь океана" class="popup__input" id="popupDescription" name="popup-description-form" minlength="2" maxlength="200">
@@ -38,7 +38,7 @@
                 <img src="images/close-button.svg" alt="Закрыть">
             </button>
             <h2 class="popup__title">Новое место</h2>
-            <form name="popupEditInformation" method="post" class="popup__form">
+            <form name="popupEditInformation" method="post" class="popup__form" novalidate>
                 <input required type="text" placeholder="Название" class="popup__input" id="mestoName" name="mesto-name-form" minlength="2" maxlength="30">
                 <span class="popup-error" id="mestoName-error"></span>
                 <input required type="url" placeholder="Ссылка на картинку" class="popup__input" id="mestoUrl" name="mesto-url-form">

@@ -1,3 +1,7 @@
+const hazInvalidInput = (inputList) => {
+    return inputList.some(inputElement => !inputElement.validity.valid);
+}
+
 const toggleButtonSave = (buttonElement, inputList) => {
     if (hazInvalidInput(inputList)) {
         buttonElement.disabled = true;
@@ -10,7 +14,7 @@ const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
     inputElement.classList.remove('popup__input-error');
-    errorElement.classList.remove('.popup__input_active');
+    errorElement.classList.remove('popup__input_active');
     errorElement.textContent = '';
 
 
@@ -19,12 +23,12 @@ const hideInputError = (formElement, inputElement) => {
 const showInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
-    inputElement.classList.add('.popup__input-error');
+    inputElement.classList.add('popup__input-error');
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add('.popup__input_active');
+    errorElement.classList.add('popup__input_active');
 };
 
-const checkInputValidity = (inputElement) => {
+const checkInputValidity = (formElement, inputElement) => {
     if (inputElement.validity.valid) {
         hideInputError(formElement, inputElement);
     } else {
@@ -46,6 +50,7 @@ const setEventListener = (formElement) => {
             toggleButtonSave(buttonElement, inputList);
         })
     })
+    toggleButtonSave(buttonElement, inputList);
 };
 
 
@@ -56,5 +61,3 @@ const enableValidation = () => {
         setEventListener(formElement);
     })
 };
-
-enableValidation();
