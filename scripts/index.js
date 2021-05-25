@@ -52,6 +52,13 @@ const fullImageButtonClose = document.querySelector('.popup-image__button-close'
 
 const ESC_CODE = "Escape";
 
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button-save',
+    inputErrorClass: 'popup__input-error',
+    errorClass: 'popup__input_active'
+}
 
 
 function submitProfileForm(evt) {
@@ -93,7 +100,7 @@ function submitAddCardForm(evt) {
     elements.prepend(createCard(nameForm.value, urlForm.value));
     nameForm.value = '';
     urlForm.value = '';
-    enableValidation();
+    enableValidation(config);
 
 }
 
@@ -154,4 +161,4 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-enableValidation();
+enableValidation(config);
