@@ -50,39 +50,50 @@ const fullImageButtonClose = document.querySelector('.popup-image__button-close'
     image = fullImage.querySelector('.popup-image__image'),
     title = fullImage.querySelector('.popup-image__title');
 
+const ESC_CODE = "Escape";
 
 
 
-function popupSubmitHandler(evt) {
+function submitProfileForm(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
     closePopup(profilePopup);
 }
 
-function openPopup(popup) {
-    nameForm.value = '';
-    urlForm.value = '';
-    popup.classList.add('popup_opened');
-    const popupOpened = document.querySelector('.popup_opened');
-    popupOpened.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains('popup')) {
-            closePopup(popupOpened);
-        }
-    });
+function openPopup(element) {
+    element.classList.add('popup_opened');
+    closeByEsc(element);
+    closeByOverlay(element);
 }
 
 function closePopup(element) {
     element.classList.remove('popup_opened');
-
+    element.removeEventListener('click', closeByOverlay);
 }
 
-function formSubmitHandler(evt) {
+function closeByEsc(evt) {
+    if (evt.key === ESC_CODE) {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
+    }
+}
+
+function closeByOverlay(element) {
+    element.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            closePopup(element);
+        }
+    });
+}
+
+function submitAddCardForm(evt) {
     evt.preventDefault();
     closePopup(addCardPopup);
     elements.prepend(createCard(nameForm.value, urlForm.value));
     nameForm.value = '';
     urlForm.value = '';
+    enableValidation();
 
 }
 
@@ -122,8 +133,8 @@ function listCardsView() {
 
 listCardsView();
 
-popupElement.addEventListener('submit', popupSubmitHandler);
-popupAddCardContainer.addEventListener('submit', formSubmitHandler);
+popupElement.addEventListener('submit', submitProfileForm);
+popupAddCardContainer.addEventListener('submit', submitAddCardForm);
 
 profileButtonEdit.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
