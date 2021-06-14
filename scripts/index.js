@@ -1,29 +1,3 @@
-const initialCards = [{
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
 const profilePopup = document.querySelector('.popup_profile'),
     popupElement = document.querySelector('.popup__container_profile'),
     nameInput = popupElement.querySelector('[name="popup-name-form"]'),
@@ -71,16 +45,14 @@ function submitProfileForm(evt) {
 function openPopup(element) {
     element.classList.add('popup_opened');
     closeByEsc(element);
-    closeByOverlay(element);
 }
 
 function closePopup(element) {
     element.classList.remove('popup_opened');
-    element.removeEventListener('click', closeByOverlay);
 }
 
-function closeByEsc(evt) {
-    if (evt.key === ESC_CODE) {
+function closeByEsc(element) {
+    if (element.key === ESC_CODE) {
         const openedPopup = document.querySelector('.popup_opened');
         closePopup(openedPopup);
     }
@@ -116,8 +88,9 @@ function createCard(name, url) {
     textElement.textContent = name;
 
     imageElement.addEventListener('click', () => {
-        title.textContent = name;
         image.src = url;
+        image.alt = `Фото (${name})`;
+        title.textContent = name;
         openPopup(fullImage);
     });
 
