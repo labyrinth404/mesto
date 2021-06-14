@@ -63,7 +63,12 @@ const eventKey = (e) => {
 const submitAddCardForm = (evt) =>{
     evt.preventDefault();
     closePopup(addCardPopup);
-    elements.prepend(createCard(nameForm.value, urlForm.value));
+    const cardData = {
+        name: nameForm.value,
+        link: urlForm.value
+    };
+    
+    elements.prepend(createCard(cardData));
     nameForm.value = '';
     urlForm.value = '';
     const { inputSelector, submitButtonSelector } = config;
