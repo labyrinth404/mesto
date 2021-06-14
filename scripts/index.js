@@ -1,10 +1,10 @@
-const profilePopup = document.querySelector('.popup_profile'),
+const profilePopup = document.querySelector('.popup_type_profile'),
     popupElement = document.querySelector('.popup__container_profile'),
     nameInput = popupElement.querySelector('[name="popup-name-form"]'),
     jobInput = popupElement.querySelector('[name="popup-description-form"]'),
     profilePopupButtonClose = document.querySelector('.popup__button-close_profile');
 
-const addCardPopup = document.querySelector('.popup-add-card'),
+const addCardPopup = document.querySelector('.popup_type_add-card'),
     addCardPopupButtonClose = addCardPopup.querySelector('.popup__button-close_add-card'),
     popupAddCardContainer = addCardPopup.querySelector('.popup__container_add-card'),
     nameForm = addCardPopup.querySelector('[name="mesto-name-form"]'),
@@ -44,16 +44,16 @@ const submitProfileForm = (evt) => {
 
 const openPopup = (element) => {
     element.classList.add('popup_opened');
-    window.addEventListener('keydown', eventKey);
+    window.addEventListener('keydown', handlerCloseEsc);
 }
 
 const closePopup = (element) => {
     element.classList.remove('popup_opened');
-    window.removeEventListener('keydown', eventKey);
+    window.removeEventListener('keydown', handlerCloseEsc);
 
 }
 
-const eventKey = (e) => {
+const handlerCloseEsc = (e) => {
     if (e.key === ESC_CODE) {
         const openedPopup = document.querySelector('.popup_opened');
         closePopup(openedPopup);
@@ -67,7 +67,7 @@ const submitAddCardForm = (evt) =>{
         name: nameForm.value,
         link: urlForm.value
     };
-    
+
     elements.prepend(createCard(cardData));
     nameForm.value = '';
     urlForm.value = '';
@@ -85,8 +85,8 @@ const createCard = (cardData) => {
         likeElemenent = newElement.querySelector('.element__like'),
         imageElement = newElement.querySelector('.element__image'),
         textElement = newElement.querySelector('.element__text'),
-        name = cardData['name'],
-        url = cardData['link'];
+        name = cardData.name,
+        url = cardData.link;
 
     imageElement.src = url;
     imageElement.alt = `Фото (${name})`;
@@ -110,13 +110,13 @@ const createCard = (cardData) => {
     return newElement;
 }
 
-const listCardsView = () => {
+const inititalCardsView = () => {
     initialCards.forEach((element) => { 
         elements.append(createCard(element));
     });
 }
 
-listCardsView();
+inititalCardsView();
 
 popupElement.addEventListener('submit', submitProfileForm);
 popupAddCardContainer.addEventListener('submit', submitAddCardForm);

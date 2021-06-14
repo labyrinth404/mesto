@@ -1,9 +1,9 @@
-const hazInvalidInput = (inputList) => {
+const hasInvalidInput = (inputList) => {
     return inputList.some(inputElement => !inputElement.validity.valid);
 }
 
 const toggleButtonSave = (buttonElement, inputList) => {
-    if (hazInvalidInput(inputList)) {
+    if (hasInvalidInput(inputList)) {
         buttonElement.disabled = true;
     } else {
         buttonElement.disabled = false;
