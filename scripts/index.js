@@ -1,3 +1,48 @@
+class Card {
+    constructor (cardData) {
+        this._name = cardData.name;
+        this._image = cardData.url;
+    }
+
+    _getTemplate () {
+        const cardElement = document
+        .querySelector('#element')
+        .content
+        .querySelector('.element')
+        .cloneNode(true);
+
+        return cardElement
+    }
+
+    generateCard () {
+        this._element = this._getTemplate();
+        this._element.querySelector('.element__trash') = this._trash;
+        this._element.querySelector('.element__like') = this._like;
+        this._element.querySelector('.element__image') = this._image;
+        this._element.querySelector('.element__text') = this._text;
+
+        return this._element
+    }
+
+    _setEventListener () {
+        this._element.querySelector('.element__like').addEventListener('click', () => {
+            this._handleLikeClick();
+        });
+        this._element.querySelector('.element__trash').addEventListener('click', () => {
+            this._handleTrashClick();
+        });
+    }
+
+    _handleLikeClick() {
+        this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    }
+
+    _handleTrashClick() {
+        this._element.remove();
+    }
+
+}
+
 const profilePopup = document.querySelector('.popup_type_profile'),
     popupElement = document.querySelector('.popup__container_profile'),
     nameInput = popupElement.querySelector('[name="popup-name-form"]'),
