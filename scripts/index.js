@@ -1,47 +1,25 @@
-class Card {
-    constructor (cardData) {
-        this._name = cardData.name;
-        this._image = cardData.url;
+import { Card } from './Card.js'
+
+class CardPopup extends Card {
+    constructor(cardData, cardSelector) {
+        super(cardData, cardSelector)
     }
 
-    _getTemplate () {
-        const cardElement = document
-        .querySelector('#element')
-        .content
-        .querySelector('.element')
-        .cloneNode(true);
-
-        return cardElement
-    }
-
-    generateCard () {
-        this._element = this._getTemplate();
-        this._element.querySelector('.element__trash') = this._trash;
-        this._element.querySelector('.element__like') = this._like;
-        this._element.querySelector('.element__image') = this._image;
-        this._element.querySelector('.element__text') = this._text;
-
-        return this._element
-    }
-
-    _setEventListener () {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._handleLikeClick();
-        });
-        this._element.querySelector('.element__trash').addEventListener('click', () => {
-            this._handleTrashClick();
+    _setEventListener() {
+        super._setEventListener();
+        this._element.querySelector('.element__image').addEventListener('click', () => {
+            this._handleFullImage();
         });
     }
 
-    _handleLikeClick() {
-        this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    _handleFullImage() {
+        fullImage.querySelector('.popup-image__image').src = this._image; 
+        fullImage.querySelector('.popup-image__image').alt = `Фото (${this._text})`;
+        fullImage.querySelector('.popup-image__title').textContent = this._text;
+        openPopup(fullImage);
     }
-
-    _handleTrashClick() {
-        this._element.remove();
-    }
-
 }
+
 
 const profilePopup = document.querySelector('.popup_type_profile'),
     popupElement = document.querySelector('.popup__container_profile'),
@@ -64,10 +42,9 @@ const profileInfo = document.querySelector('.profile'),
 const elements = document.querySelector('.elements'),
     elementTemplate = elements.querySelector('#element').content;
 
-const fullImageButtonClose = document.querySelector('.popup-image__button-close'),
-    fullImage = document.querySelector('.popup-image'),
-    image = fullImage.querySelector('.popup-image__image'),
-    title = fullImage.querySelector('.popup-image__title');
+const fullImageButtonClose = document.querySelector('.popup-image__button-close');
+const fullImage = document.querySelector('.popup-image');
+    
 
 const ESC_CODE = "Escape";
 
@@ -124,44 +101,13 @@ const submitAddCardForm = (evt) =>{
 
 }
 
-const createCard = (cardData) => {
-    const newElement = elementTemplate.querySelector('.element').cloneNode(true),
-        deleteElement = newElement.querySelector('.element__trash'),
-        likeElemenent = newElement.querySelector('.element__like'),
-        imageElement = newElement.querySelector('.element__image'),
-        textElement = newElement.querySelector('.element__text'),
-        name = cardData.name,
-        url = cardData.link;
 
-    imageElement.src = url;
-    imageElement.alt = `Фото (${name})`;
-    textElement.textContent = name;
 
-    imageElement.addEventListener('click', () => {
-        image.src = url;
-        image.alt = `Фото (${name})`;
-        title.textContent = name;
-        openPopup(fullImage);
-    });
-
-    deleteElement.addEventListener('click', () => {
-        newElement.remove();
-    });
-
-    likeElemenent.addEventListener('click', () => {
-        likeElemenent.classList.toggle('element__like_active');
-    });
-
-    return newElement;
-}
-
-const inititalCardsView = () => {
-    initialCards.forEach((element) => { 
-        elements.append(createCard(element));
-    });
-}
-
-inititalCardsView();
+initialCards.forEach((item) => {
+    const card = new CardPopup(item, '#element');
+    const cardElement = card.generateCard();
+    elements.append(cardElement);
+}); 
 
 popupElement.addEventListener('submit', submitProfileForm);
 popupAddCardContainer.addEventListener('submit', submitAddCardForm);
