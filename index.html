@@ -24,9 +24,9 @@
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="popupEditInformation" method="post" class="popup__form" novalidate>
-                <input required type="text" value="Жак-ив Кусто" class="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40">
+                <input required type="text" value="Жак-ив Кусто" class="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40" autocomplete="off">
                 <span class="popup-error" id="popupName-error"></span>
-                <input required type="text" value="Иследователь океана" class="popup__input" id="popupDescription" name="popup-description-form" minlength="2" maxlength="200">
+                <input required type="text" value="Иследователь океана" class="popup__input" id="popupDescription" name="popup-description-form" minlength="2" maxlength="200" autocomplete="off">
                 <span class="popup-error" id="popupDescription-error"></span>
                 <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
@@ -40,7 +40,7 @@
             </button>
             <h2 class="popup__title">Новое место</h2>
             <form name="popupEditInformation" method="post" class="popup__form" novalidate>
-                <input required type="text" placeholder="Название" class="popup__input" id="mestoName" name="mesto-name-form" minlength="2" maxlength="30">
+                <input required type="text" placeholder="Название" class="popup__input" id="mestoName" name="mesto-name-form" minlength="2" maxlength="30" autocomplete="off">
                 <span class="popup-error" id="mestoName-error"></span>
                 <input required type="url" placeholder="Ссылка на картинку" class="popup__input" id="mestoUrl" name="mesto-url-form">
                 <span class="popup-error" id="mestoUrl-error"></span>

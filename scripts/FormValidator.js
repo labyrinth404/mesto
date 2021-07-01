@@ -34,10 +34,10 @@ export class FormValidator {
         this.#inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this.#checkInputValidity(inputElement);
-                this.#toggleButtonSave();
+                this.toggleButtonSave();
             })
         })
-        this.#toggleButtonSave(this.#buttonElement, this.#inputList);
+        this.toggleButtonSave();
     }
 
     #checkInputValidity(inputElement){
@@ -60,16 +60,10 @@ export class FormValidator {
 
 
     #hasInvalidInput(){
-    //    return this.#inputList.some((inputElement) => {
-    //        !inputElement.validity.valid
-    //    });
-    // Раньше работало с методом .some(), как переделал все в классы персатло работать
-    // через console.log() Тестировал, всегда возрващает false хотя внутри все true.
-       if (this.#inputList[0].validity.valid == true && this.#inputList[1].validity.valid == true) {
-            return false
-        } else {
-            return true
-        }
+        return this.#inputList.some((inputElement) => {
+            return !inputElement.validity.valid
+        });
+
     }
 
     #hideInputError(inputElement){
@@ -84,7 +78,7 @@ export class FormValidator {
 
     }
 
-    #toggleButtonSave(){
+    toggleButtonSave(){
         if (this.#hasInvalidInput(this.#inputList)) {
             this.#buttonElement.disabled = true;
         } else {

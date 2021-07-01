@@ -20,8 +20,7 @@ const profileInfo = document.querySelector('.profile'),
     profileButtonEdit = profileInfo.querySelector('.profile__button-edit'),
     profileButtonAdd = profileInfo.querySelector('.profile__button-add');
 
-const elements = document.querySelector('.elements'),
-    elementTemplate = elements.querySelector('#element').content;
+const elements = document.querySelector('.elements');
 
 const fullImageButtonClose = document.querySelector('.popup-image__button-close');
 const fullImage = document.querySelector('.popup-image');
@@ -29,32 +28,19 @@ const fullImage = document.querySelector('.popup-image');
 
 const ESC_CODE = "Escape";
 
-class CardPopup extends Card {
-    constructor(cardData, cardSelector) {
-        super(cardData, cardSelector)
-    }
-
-    _setEventListener() {
-        super._setEventListener();
-        this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._handleFullImage();
-        });
-    }
-
-    _handleFullImage() {
-        fullImage.querySelector('.popup-image__image').src = this._image; 
-        fullImage.querySelector('.popup-image__image').alt = `Фото (${this._text})`;
-        fullImage.querySelector('.popup-image__title').textContent = this._text;
-        openPopup(fullImage);
-    }
-}
-
 const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button-save',
     inputErrorClass: 'popup__input-error',
     errorClass: 'popup__input_active'
+}
+
+export const handleFullImage = (image, title) => {      //внутрений голос, говорит что так не нужно, но это работает!!!
+   fullImage.querySelector('.popup-image__image').src = image; 
+   fullImage.querySelector('.popup-image__image').alt = `Фото (${title})`;
+   fullImage.querySelector('.popup-image__title').textContent = title;
+    openPopup(fullImage);
 }
 
 
@@ -90,24 +76,21 @@ const submitAddCardForm = (evt) =>{
         name: nameForm.value,
         link: urlForm.value
     };
-    const card = new CardPopup(cardData, '#element');
+    const card = new Card(cardData, '#element');
     const cardElement = card.generateCard();
 
     elements.prepend(cardElement);
     nameForm.value = '';
     urlForm.value = '';
-    const { inputSelector, submitButtonSelector } = config;
-        inputList = Array.from(addCardPopup.querySelectorAll(inputSelector)),
-        buttonElement = addCardPopup.querySelector(submitButtonSelector);
     
-    toggleButtonSave(buttonElement, inputList);
+    FormValidator.toggleButtonSave;
 
 }
 
 
 
 initialCards.forEach((item) => {
-    const card = new CardPopup(item, '#element');
+    const card = new Card(item, '#element');
     const cardElement = card.generateCard();
     elements.append(cardElement);
 }); 

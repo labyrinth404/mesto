@@ -1,3 +1,5 @@
+import { handleFullImage } from './index.js'
+
 export class Card {
     #text
     #image
@@ -31,6 +33,9 @@ export class Card {
     }
 
     #setEventListener () {
+        this.#element.querySelector('.element__image').addEventListener('click', () => {
+            handleFullImage(this.#image, this.#text);
+        });
         this.#element.querySelector('.element__like').addEventListener('click', () => {
             this.#handleLikeClick();
         });
@@ -46,6 +51,7 @@ export class Card {
 
     #handleTrashClick() {
         this.#element.remove();
+        this.#element = null;
     }
 
 }
