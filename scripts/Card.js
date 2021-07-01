@@ -1,13 +1,17 @@
 export class Card {
+    #text
+    #image
+    #cardSelector
+    #element
     constructor (cardData, cardSelector) {
-        this._text = cardData.name;
-        this._image = cardData.link;
-        this._cardSelector = cardSelector
+        this.#text = cardData.name;
+        this.#image = cardData.link;
+        this.#cardSelector = cardSelector
     }
 
-    _getTemplate () {
+    #getTemplate () {
         const cardElement = document
-        .querySelector(this._cardSelector)
+        .querySelector(this.#cardSelector)
         .content
         .querySelector('.element')
         .cloneNode(true);
@@ -16,32 +20,32 @@ export class Card {
     }
 
     generateCard () {
-        this._element = this._getTemplate();
-        this._setEventListener();
+        this.#element = this.#getTemplate();
+        this.#setEventListener();
 
-        this._element.querySelector('.element__image').src = this._image;
-        this._element.querySelector('.element__image').alt = `Фото(${this._text})`;
-        this._element.querySelector('.element__text').textContent = this._text;
+        this.#element.querySelector('.element__image').src = this.#image;
+        this.#element.querySelector('.element__image').alt = `Фото(${this.#text})`;
+        this.#element.querySelector('.element__text').textContent = this.#text;
 
-        return this._element
+        return this.#element
     }
 
-    _setEventListener () {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._handleLikeClick();
+    #setEventListener () {
+        this.#element.querySelector('.element__like').addEventListener('click', () => {
+            this.#handleLikeClick();
         });
-        this._element.querySelector('.element__trash').addEventListener('click', () => {
-            this._handleTrashClick();
+        this.#element.querySelector('.element__trash').addEventListener('click', () => {
+            this.#handleTrashClick();
         });
 
     }
 
-    _handleLikeClick() {
-        this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    #handleLikeClick() {
+        this.#element.querySelector('.element__like').classList.toggle('element__like_active');
     }
 
-    _handleTrashClick() {
-        this._element.remove();
+    #handleTrashClick() {
+        this.#element.remove();
     }
 
 }

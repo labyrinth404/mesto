@@ -1,25 +1,6 @@
+import { initialCards } from './initial-сards.js'
 import { Card } from './Card.js'
-
-class CardPopup extends Card {
-    constructor(cardData, cardSelector) {
-        super(cardData, cardSelector)
-    }
-
-    _setEventListener() {
-        super._setEventListener();
-        this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._handleFullImage();
-        });
-    }
-
-    _handleFullImage() {
-        fullImage.querySelector('.popup-image__image').src = this._image; 
-        fullImage.querySelector('.popup-image__image').alt = `Фото (${this._text})`;
-        fullImage.querySelector('.popup-image__title').textContent = this._text;
-        openPopup(fullImage);
-    }
-}
-
+import { FormValidator } from './FormValidator.js'
 
 const profilePopup = document.querySelector('.popup_type_profile'),
     popupElement = document.querySelector('.popup__container_profile'),
@@ -47,6 +28,26 @@ const fullImage = document.querySelector('.popup-image');
     
 
 const ESC_CODE = "Escape";
+
+class CardPopup extends Card {
+    constructor(cardData, cardSelector) {
+        super(cardData, cardSelector)
+    }
+
+    _setEventListener() {
+        super._setEventListener();
+        this._element.querySelector('.element__image').addEventListener('click', () => {
+            this._handleFullImage();
+        });
+    }
+
+    _handleFullImage() {
+        fullImage.querySelector('.popup-image__image').src = this._image; 
+        fullImage.querySelector('.popup-image__image').alt = `Фото (${this._text})`;
+        fullImage.querySelector('.popup-image__title').textContent = this._text;
+        openPopup(fullImage);
+    }
+}
 
 const config = {
     formSelector: '.popup__form',
@@ -89,8 +90,10 @@ const submitAddCardForm = (evt) =>{
         name: nameForm.value,
         link: urlForm.value
     };
+    const card = new CardPopup(cardData, '#element');
+    const cardElement = card.generateCard();
 
-    elements.prepend(createCard(cardData));
+    elements.prepend(cardElement);
     nameForm.value = '';
     urlForm.value = '';
     const { inputSelector, submitButtonSelector } = config;
@@ -130,4 +133,7 @@ window.addEventListener('click', (evt) => {
     }
 });
 
-enableValidation(config);
+const validationCardPopup = new FormValidator(config, addCardPopup);
+const validationEditInfo =  new FormValidator(config, profilePopup);
+validationCardPopup.enableValidation();
+validationEditInfo.enableValidation();
