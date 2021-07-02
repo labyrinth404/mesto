@@ -24,9 +24,10 @@ const elements = document.querySelector('.elements');
 
 const fullImageButtonClose = document.querySelector('.popup-image__button-close');
 const fullImage = document.querySelector('.popup-image');
-    
+
 
 const ESC_CODE = "Escape";
+
 
 const config = {
     formSelector: '.popup__form',
@@ -35,6 +36,10 @@ const config = {
     inputErrorClass: 'popup__input-error',
     errorClass: 'popup__input_active'
 }
+
+const validationCardPopup = new FormValidator(config, addCardPopup);
+const validationEditInfo =  new FormValidator(config, profilePopup);
+
 
 export const handleFullImage = (image, title) => {      //внутрений голос, говорит что так не нужно, но это работает!!!
    fullImage.querySelector('.popup-image__image').src = image; 
@@ -69,6 +74,14 @@ const handlerCloseEsc = (e) => {
     }
 }
 
+const createCard = (cardData) => {
+    const card = new Card(cardData, '#element');
+    return card.generateCard();
+}
+
+
+
+
 const submitAddCardForm = (evt) =>{
     evt.preventDefault();
     closePopup(addCardPopup);
@@ -76,23 +89,19 @@ const submitAddCardForm = (evt) =>{
         name: nameForm.value,
         link: urlForm.value
     };
-    const card = new Card(cardData, '#element');
-    const cardElement = card.generateCard();
 
-    elements.prepend(cardElement);
+    elements.prepend(createCard(cardData));
     nameForm.value = '';
     urlForm.value = '';
-    
-    FormValidator.toggleButtonSave;
 
+    validationCardPopup.toggleButtonSave();
+    validationEditInfo.toggleButtonSave();
 }
 
 
 
-initialCards.forEach((item) => {
-    const card = new Card(item, '#element');
-    const cardElement = card.generateCard();
-    elements.append(cardElement);
+initialCards.forEach((cardData) => {
+    elements.append(createCard(cardData));
 }); 
 
 popupElement.addEventListener('submit', submitProfileForm);
@@ -116,7 +125,5 @@ window.addEventListener('click', (evt) => {
     }
 });
 
-const validationCardPopup = new FormValidator(config, addCardPopup);
-const validationEditInfo =  new FormValidator(config, profilePopup);
 validationCardPopup.enableValidation();
 validationEditInfo.enableValidation();
