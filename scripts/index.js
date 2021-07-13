@@ -1,6 +1,7 @@
 import { initialCards } from './initial-сards.js';
 import { Card } from './Card.js';
 import { Popup } from './Popup.js';
+import { PopupWithForm } from './PopupWithForm.js';
 import { FormValidator } from './FormValidator.js';
 import { profilePopup,
     nameInput,
@@ -23,10 +24,39 @@ import { profilePopup,
     addCardPopupForm,
     config } from './constants.js';
 
-const zozo = new Popup('.popup_type_add-card');
+
 const validationCardPopup = new FormValidator(config, addCardPopup);
 const validationEditInfo =  new FormValidator(config, profilePopup);
-zozo.open()
+
+const addCard = new PopupWithForm('.popup_type_add-card', (evt) => {
+    evt.preventDefault();
+    
+    const addCardPopup = document.querySelector('.popup_type_add-card');
+    const cardData = {
+        name: addCardPopup.querySelector('[name="mesto-name-form"]').value,
+        link: addCardPopup.querySelector('[name="mesto-url-form"').value
+    };
+    addCard.close();
+    elements.prepend(createCard(cardData));
+
+    validationCardPopup.toggleButtonSave();
+    validationEditInfo.toggleButtonSave();
+});
+
+const editProfile = new PopupWithForm('.popup_type_profile', (evt) => {
+    evt.preventDefault();
+    const popupElement = document.querySelector('.popup__container_profile');
+
+    profileName.textContent = popupElement.querySelector('[name="popup-name-form"]').value;
+    profileDescription.textContent = popupElement.querySelector('[name="popup-description-form"]').value;
+    
+    editProfile.close();
+});
+
+
+
+
+
 export function handleFullImage(image, title) {      //внутрений голос, говорит что так не нужно, но это работает!!!
    fullImage.querySelector('.popup-image__image').src = image; 
    fullImage.querySelector('.popup-image__image').alt = `Фото (${title})`;
@@ -41,23 +71,6 @@ function submitProfileForm(evt) {
     closePopup(profilePopup);
 }
 
-function openPopup(element) {
-    element.classList.add('popup_opened');
-    window.addEventListener('keydown', handlerCloseEsc);
-}
-
-export function closePopup(element) {
-    element.classList.remove('popup_opened');
-    window.removeEventListener('keydown', handlerCloseEsc);
-
-}
-
-export function handlerCloseEsc(e) {
-    if (e.key === ESC_CODE) {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
-    }
-}
 
 function createCard(cardData) {
     const card = new Card(cardData, '#element');
@@ -79,21 +92,26 @@ function submitAddCardForm(evt) {
     validationEditInfo.toggleButtonSave();
 }
 
-
+popupAddCardContainer
 initialCards.forEach((cardData) => {
     elements.append(createCard(cardData));
 }); 
-
+/*
 popupElement.addEventListener('submit', submitProfileForm);
-popupAddCardContainer.addEventListener('submit', submitAddCardForm);
+*/
+profileButtonEdit.addEventListener('click', () => {editProfile.open()});
+profileButtonAdd.addEventListener('click', () => {addCard.open()});
+/*
 
+popupAddCardContainer.addEventListener('submit', addCard.open());
 profileButtonEdit.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileDescription.textContent;
     openPopup(profilePopup)
 });
-/*
-profileButtonAdd.addEventListener('click', () => { openPopup(addCardPopup) });
+
+
+
 profilePopupButtonClose.addEventListener('click', () => { closePopup(profilePopup) });
 addCardPopupButtonClose.addEventListener('click', () => { closePopup(addCardPopup) });
 fullImageButtonClose.addEventListener('click', () => { closePopup(fullImage) });
