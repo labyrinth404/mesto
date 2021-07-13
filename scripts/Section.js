@@ -1,7 +1,7 @@
-class Section {
-    constructor(data, selector) {
-        this.items = data.items;
-        this.rendere = data.rendere;
+export default class Section {
+    constructor( {items, rendere}, selector) {
+        this.items = items;
+        this.rendere = rendere;
         this.selector = selector;
     }
 
@@ -9,7 +9,7 @@ class Section {
 
     }
 
-    addItem() {
+    addItem(element) {
 
     }
 }
