@@ -1,6 +1,7 @@
 class UserInfo {
-    constructor() {
-
+    constructor({userName, infUser}) {
+        this.userName = userName;
+        this.infUser = infUser;
     }
 
     getUserInfo() {
