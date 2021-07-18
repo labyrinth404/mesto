@@ -24,7 +24,7 @@ export class PopupWithForm extends Popup {
 
     #getInputValues() {
         console.log(this.#selector.querySelectorAll('.popup__input')[0].value)
-
+        console.log(this.#selector.querySelectorAll('.popup__input')[1].value)
     }
 
     #setEventListeners() {
