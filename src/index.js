@@ -1,14 +1,17 @@
-import { initialCards } from './initial-сards.js';
-import { Card } from './Card.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { UserInfo } from './UserInfo.js'
-import { FormValidator } from './FormValidator.js';
-import Section from './Section.js';
+import { initialCards } from './scripts/initial-сards.js';
+import { Card } from './scripts/Card.js';
+import { PopupWithForm } from './scripts/PopupWithForm.js';
+import { UserInfo } from './scripts/UserInfo.js'
+import { FormValidator } from './scripts/FormValidator.js';
+import Section from './scripts/Section.js';
 import { profilePopup,
     addCardPopup,
     profileButtonEdit,
     profileButtonAdd,
-    config } from './constants.js';
+    config } from './scripts/constants.js';
+    
+import './pages/index.css'; 
+
 
 
 const validationCardPopup = new FormValidator(config, addCardPopup);
