@@ -1,16 +1,19 @@
 export class UserInfo {
-    constructor({userName, infUser}) {
-        this.userName = userName;
-        this.infUser = infUser;
+    #userName;
+    #userInfo;
+    constructor({ userName, userInfo }) {
+        this.#userName = userName;
+        this.#userInfo = userInfo;
     }
 
     getUserInfo() {
-        return {user: document.querySelector(this.userName).textContent, 
-                info: document.querySelector(this.infUser).textContent};
+        
+        return {user: document.querySelector(this.#userName).textContent, 
+                info: document.querySelector(this.#userInfo).textContent};
     }
 
-    setUserInfo(newUserName, newInfUser) {
-        document.querySelector(this.userName).textContent = newUserName;
-        document.querySelector(this.infUser).textContent = newInfUser;
+    setUserInfo(newUserName, newUserInfo) {
+        document.querySelector(this.#userName).textContent = newUserName;
+        document.querySelector(this.#userInfo).textContent = newUserInfo;
     }
 }
