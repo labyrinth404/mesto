@@ -1,4 +1,4 @@
-export class Popup {
+export default class Popup {
     #selector
     constructor(popupSelector) {
         this.#selector = document.querySelector(popupSelector);

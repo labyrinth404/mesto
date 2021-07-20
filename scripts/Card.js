@@ -1,4 +1,4 @@
-import { handleFullImage } from './index.js'
+import { PopupWithImage } from './PopupWithImage.js'
 
 export class Card {
     #text
@@ -11,7 +11,7 @@ export class Card {
         this.#cardSelector = cardSelector
     }
 
-    #getTemplate () {
+    #getTemplate() {
         const cardElement = document
         .querySelector(this.#cardSelector)
         .content
@@ -21,7 +21,7 @@ export class Card {
         return cardElement
     }
 
-    generateCard () {
+    generateCard() {
         this.#element = this.#getTemplate();
         this.#setEventListener();
 
@@ -32,9 +32,10 @@ export class Card {
         return this.#element
     }
 
-    #setEventListener () {
+    #setEventListener() {
         this.#element.querySelector('.element__image').addEventListener('click', () => {
-            handleFullImage(this.#image, this.#text);
+           const popupWithImage = new PopupWithImage('.popup-image');
+           popupWithImage.open(this.#image, this.#text)
         });
         this.#element.querySelector('.element__like').addEventListener('click', () => {
             this.#handleLikeClick();

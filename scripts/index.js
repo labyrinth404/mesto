@@ -1,10 +1,9 @@
 import { initialCards } from './initial-сards.js';
 import { Card } from './Card.js';
 import { PopupWithForm } from './PopupWithForm.js';
+import { UserInfo } from './UserInfo.js'
 import { FormValidator } from './FormValidator.js';
 import { profilePopup,
-    nameInput,
-    jobInput,
     addCardPopup,
     popupAddCardContainer,
     profileName,
@@ -12,7 +11,6 @@ import { profilePopup,
     profileButtonEdit,
     profileButtonAdd,
     elements,
-    fullImage,
     config } from './constants.js';
 
 
@@ -34,28 +32,23 @@ const addCard = new PopupWithForm('.popup_type_add-card', (evt) => {
     validationEditInfo.toggleButtonSave();
 });
 
+const userInfo = new UserInfo({ userName: '.profile__name', 
+                                infUser: '.profile__description'});
+
+
 const editProfile = new PopupWithForm('.popup_type_profile', (evt) => {
     evt.preventDefault();
-    const popupElement = document.querySelector('.popup__container_profile');
 
-    profileName.textContent = popupElement.querySelector('[name="popup-name-form"]').value;
-    profileDescription.textContent = popupElement.querySelector('[name="popup-description-form"]').value;
-    
+    const popupElement = document.querySelector('.popup__container_profile');
+    const formUserName = popupElement.querySelector('[name="popup-name-form"]');
+    const formUserInfo = popupElement.querySelector('[name="popup-description-form"]');
+
+    formUserName.textContent = userInfo.getUserInfo().user;
+    formUserInfo.textContent = userInfo.getUserInfo().info;
+
+    userInfo.setUserInfo(formUserName.value, formUserInfo.value)
     editProfile.close();
 });
-
-
-
-
-
-export function handleFullImage(image, title) {      //внутрений голос, говорит что так не нужно, но это работает!!!
-   fullImage.querySelector('.popup-image__image').src = image; 
-   fullImage.querySelector('.popup-image__image').alt = `Фото (${title})`;
-   fullImage.querySelector('.popup-image__title').textContent = title;
-    openPopup(fullImage);
-}
-
-
 
 
 function createCard(cardData) {
