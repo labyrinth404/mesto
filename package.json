@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/labyrinth404/mesto/issues"
   },
-  "homepage": "https://github.com/labyrinth404/mesto#readme"
+  "dependencies": {},
+  "homepage": "https://github.com/labyrinth404/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2"
+  }
 }
