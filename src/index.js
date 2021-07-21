@@ -12,12 +12,6 @@ import { profilePopup,
     
 import './pages/index.css'; 
 
-import Avatar from './images/avatar_kusto.jpg';
-
-const whoIsTheGoat = [
-    {name: 'Avatar', link: './images/avatar_kusto.jpg'}
-]
-
 
 const validationCardPopup = new FormValidator(config, addCardPopup);
 const validationEditInfo =  new FormValidator(config, profilePopup);
