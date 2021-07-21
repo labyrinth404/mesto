@@ -12,6 +12,11 @@ import { profilePopup,
     
 import './pages/index.css'; 
 
+import Avatar from './images/avatar_kusto.jpg';
+
+const whoIsTheGoat = [
+    {name: 'Avatar', link: './images/avatar_kusto.jpg'}
+]
 
 
 const validationCardPopup = new FormValidator(config, addCardPopup);
@@ -59,11 +64,15 @@ const editProfile = new PopupWithForm('.popup_type_profile', (evt) => {
     const formUserName = popupElement.querySelector('[name="popup-name-form"]');
     const formUserInfo = popupElement.querySelector('[name="popup-description-form"]');
 
+
     formUserName.textContent = userInfo.getUserInfo().user;
     formUserInfo.textContent = userInfo.getUserInfo().info;
 
     userInfo.setUserInfo(formUserName.value, formUserInfo.value)
     editProfile.close();
+    
+    formUserName.value = userInfo.getUserInfo().user;
+    formUserInfo.value = userInfo.getUserInfo().info;
 });
 
 

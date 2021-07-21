@@ -12,14 +12,14 @@
 
 <body class="page">
     <header class="header">
-        <img src="./images/logo-mesto.svg" class="header__logo" alt="Логотип">
+        <img src="<%=require('./images/logo-mesto.svg')%>" class="header__logo" alt="Логотип">
     </header>
     <!--Попапы-->
     <!--Попап профиля. Редактирование данных.-->
     <section class="popup popup_type_profile">
         <div class="popup__container popup__container_profile">
             <button type="button" class="popup__button-close popup__button-close_profile">
-                <img src=".//close-button.svg" alt="Закрыть">
+                <img src="<%=require('./images/close-button.svg')%>" alt="Закрыть">
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="popupEditInformation" method="post" class="popup__form" novalidate>
@@ -35,7 +35,7 @@
     <section class="popup popup_type_add-card">
         <div class="popup__container popup__container_add-card">
             <button type="button" class="popup__button-close popup__button-close_add-card">
-                <img src="./images/close-button.svg" alt="Закрыть">
+                <img src="<%=require('./images/close-button.svg')%>" alt="Закрыть">
             </button>
             <h2 class="popup__title">Новое место</h2>
             <form name="popupEditInformation" method="post" class="popup__form" novalidate>
@@ -51,7 +51,7 @@
     <section class="popup popup-image">
         <div class="popup-image__container">
             <button type="button" class="popup__button-close popup-image__button-close">
-                <img src="./images/close-button.svg" alt="Закрыть">
+                <img src="<%=require('./images/close-button.svg')%>" alt="Закрыть">
             </button>
             <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" class="popup-image__image" alt="Картинка элемента">
             <h2 class="popup-image__title">Иваново</h2>
@@ -60,16 +60,16 @@
     <!--Основная часть страницы.-->
     <main class="main">
         <section class="profile">
-            <img src="./images/avatar_kusto.jpg" class="profile__avatar" alt="Аватарка">
+            <img src="<%=require('./images/avatar_kusto.jpg')%>" class="profile__avatar" alt="Аватарка">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__button-edit"> 
-                    <img src="./images/edit-button.svg" alt="Редактировать">
+                    <img src="<%=require('./images/edit-button.svg')%>" alt="Редактировать">
                 </button>
                 <p class="profile__description">Исследователь океана</p>
             </div>
             <button type="button" class="profile__button-add">
-                <img src="./images/add-button.svg" alt="Добавить">
+                <img src="<%=require('./images/add-button.svg')%>" alt="Добавить">
             </button>
         </section>
         <!--Набор карточек с изображением мест.-->
