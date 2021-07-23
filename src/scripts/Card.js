@@ -1,14 +1,14 @@
-import { PopupWithImage } from './PopupWithImage.js'
-
 export class Card {
     #text
     #image
     #cardSelector
     #element
-    constructor (cardData, cardSelector) {
+    #handleCardClick
+    constructor ({ handleCardClick }, cardData, cardSelector) {
         this.#text = cardData.name;
         this.#image = cardData.link;
         this.#cardSelector = cardSelector
+        this.#handleCardClick = handleCardClick;
     }
 
     #getTemplate() {
@@ -18,6 +18,7 @@ export class Card {
         .querySelector('.element')
         .cloneNode(true);
 
+        
         return cardElement
     }
 
@@ -34,9 +35,8 @@ export class Card {
 
     #setEventListener() {
         this.#element.querySelector('.element__image').addEventListener('click', () => {
-           const popupWithImage = new PopupWithImage('.popup-image');
-           popupWithImage.open(this.#image, this.#text)
-        });
+            this.#handleCardClick()});
+
         this.#element.querySelector('.element__like').addEventListener('click', () => {
             this.#handleLikeClick();
         });

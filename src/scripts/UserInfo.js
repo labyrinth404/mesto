@@ -2,18 +2,18 @@ export class UserInfo {
     #userName;
     #userInfo;
     constructor({ userName, userInfo }) {
-        this.#userName = userName;
-        this.#userInfo = userInfo;
+        this.#userName = document.querySelector(userName);
+        this.#userInfo = document.querySelector(userInfo);
     }
 
     getUserInfo() {
         
-        return {user: document.querySelector(this.#userName).textContent, 
-                info: document.querySelector(this.#userInfo).textContent};
+        return {user: this.#userName.textContent, 
+                info: this.#userInfo.textContent};
     }
 
     setUserInfo(newUserName, newUserInfo) {
-        document.querySelector(this.#userName).textContent = newUserName;
-        document.querySelector(this.#userInfo).textContent = newUserInfo;
+        this.#userName.textContent = newUserName;
+        this.#userInfo.textContent = newUserInfo;
     }
 }
