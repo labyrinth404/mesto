@@ -38,6 +38,7 @@ const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {
     renderCard({name: inputValues['mesto-name-form'], link: inputValues['mesto-url-form']});
     
     addCard.close();
+    document.querySelector('.popup_type_add-card').querySelector('.popup__form').reset();
 
     validationCardPopup.toggleButtonSave();
 });
