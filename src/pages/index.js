@@ -1,19 +1,20 @@
-import { initialCards } from './utils/initial-сards.js';
-import { Card } from './scripts/Card.js';
-import { PopupWithForm } from './scripts/PopupWithForm.js';
-import { PopupWithImage } from './scripts/PopupWithImage.js'
-import { UserInfo } from './scripts/UserInfo.js'
-import { FormValidator } from './scripts/FormValidator.js';
-import Section from './scripts/Section.js';
+import { initialCards } from '../utils/initial-сards.js';
+import { Card } from '../components/Card.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js'
+import { UserInfo } from '../components/UserInfo.js'
+import { FormValidator } from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 import { profilePopup,
     addCardPopup,
     profileButtonEdit,
     profileButtonAdd,
-    config } from './utils/constants.js';
+    config } from '../utils/constants.js';
     
-import './pages/index.css'; 
+import './index.css'; 
 
 const popupWithImage = new PopupWithImage('.popup-image');
+popupWithImage.setEventListeners()
 
 function renderCard(item) {
     const card = new Card({ handleCardClick: () => {
@@ -38,24 +39,21 @@ const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {
     renderCard({name: inputValues['mesto-name-form'], link: inputValues['mesto-url-form']});
     
     addCard.close();
-    document.querySelector('.popup_type_add-card').querySelector('.popup__form').reset();
 
     validationCardPopup.toggleButtonSave();
 });
+addCard.setEventListeners()
 
 const userInfo = new UserInfo({ userName: '.profile__name', 
                                 userInfo: '.profile__description'});
 
 const editProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
+    
     userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'])
       
-    
-    
-
     editProfile.close();
-    
-   
 });
+editProfile.setEventListeners()
 
 section.renderItems();
 
