@@ -4,10 +4,6 @@
     opacity: 100%;
     width: 22px;
     height: 19px;
-    grid-column: 2/3;
-    grid-row: 2/3;
-    align-self: center;
-    margin-right: 15px;
     justify-self: center;
     transition: .666s opacity ease-out;
     border: transparent;

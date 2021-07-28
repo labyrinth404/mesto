@@ -2,7 +2,11 @@
     border-radius: 50%;
     max-width: 120px;
     margin-bottom: 22px;
+    grid-row: 1/2;
+    grid-column: 1/2;
+    z-index: 2;
 }
+
 
 @media screen and (min-width: 786px) {
     .profile__avatar {

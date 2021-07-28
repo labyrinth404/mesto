@@ -16,6 +16,32 @@
     </header>
     <!--Попапы-->
     <!--Попап профиля. Редактирование данных.-->
+    <section class="popup popup_type_avatar">
+        <div class="popup__container popup__container_avatar">
+            <button type="button" class="popup__button-close popup__button-close_avatar">
+                <img src="<%=require('./images/close-button.svg')%>" alt="Закрыть">
+            </button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form name="popupEditInformation" method="post" class="popup__form" novalidate>
+                <input required type="url" value="Ссылка на картинку" class="popup__input" id="mestoUrl" name="mesto-url-form">
+                <span class="popup-error" id="mestoUrl-error"></span>
+                <button type="submit" class="popup__button-save">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <!--Попап удаления. Подтверждение удаления.-->
+    <section class="popup popup_type_confirm">
+        <div class="popup__container popup__container_confirm">
+            <button type="button" class="popup__button-close popup__button-close_confirm">
+                <img src="<%=require('./images/close-button.svg')%>" alt="Закрыть">
+            </button>
+            <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
+            <form name="popupDeleteConfirmation" method="post" class="popup__form" novalidate>
+                <button type="submit" class="popup__button-save">Да</button>
+            </form>
+        </div>
+    </section>
+    <!--Попап профиля. Редактирование данных.-->
     <section class="popup popup_type_profile">
         <div class="popup__container popup__container_profile">
             <button type="button" class="popup__button-close popup__button-close_profile">
@@ -60,6 +86,7 @@
     <!--Основная часть страницы.-->
     <main class="main">
         <section class="profile">
+            <img src="<%=require('./images/update.svg')%>" class="profile__update"></img>
             <img src="<%=require('./images/avatar_kusto.jpg')%>" class="profile__avatar" alt="Аватарка">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -81,7 +108,10 @@
                         <img src="https://127.0.0.1" class="element__image" alt="Картинка элемента">
                         <button type="button" class="element__trash"></button>
                         <h2 class="element__text">текст</h2>
-                        <button type="button" class="element__like"></button>
+                        <div class="element__container">
+                            <button type="button" class="element__like"></button>
+                            <span class="element__count"></span>
+                        </div>
                     </div>
                 </div>
             </template>

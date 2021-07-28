@@ -1,0 +1,5 @@
+.element__container {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}

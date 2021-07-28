@@ -1,0 +1,17 @@
+.profile__update {
+    max-width: 120px;
+    padding: 47px;
+    min-width: 26px;
+    grid-row: 1/2;
+    grid-column: 1/2;
+    opacity: 0;
+    transition: .5s opacity ease-in-out;
+    z-index: 3;
+    
+}
+
+.profile__update:hover {
+    opacity: 100%;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, .8)
+}
