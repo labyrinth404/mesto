@@ -5,6 +5,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js'
 import { UserInfo } from '../components/UserInfo.js'
 import { FormValidator } from '../components/FormValidator.js';
 import Section from '../components/Section.js';
+import { Api } from '../components/Api.js'
 import { profilePopup,
     addCardPopup,
     profileButtonEdit,
@@ -76,3 +77,14 @@ profileButtonAdd.addEventListener('click', () => {addCard.open()});
 
 validationCardPopup.enableValidation();
 validationEditInfo.enableValidation();
+
+
+const api = new Api({
+    url: 'https://nomoreparties.co/v1/cohort-26/users/me',
+    headers: {
+      authorization: '379cd553-b5f6-46c7-ade6-e4556a60f89b',
+      'Content-Type': 'application/json'
+    }
+  }); 
+
+  console.log(api.getInitialCards())
