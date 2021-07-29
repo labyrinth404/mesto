@@ -5,7 +5,7 @@
     grid-row: 1/2;
     grid-column: 1/2;
     opacity: 0;
-    transition: .5s opacity ease-in-out;
+    transition: .25s opacity ease;
     z-index: 3;
     
 }

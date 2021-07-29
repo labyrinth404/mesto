@@ -12,7 +12,9 @@ export class Api {
             header: this.#headers
         }).then((res) => {
             return res.json();
-        }).catch((err) => {
+        })
+        .then((result) => {console.log(result)})
+        .catch((err) => {
             alert(err);
         })
     }

@@ -82,8 +82,7 @@ validationEditInfo.enableValidation();
 const api = new Api({
     url: 'https://nomoreparties.co/v1/cohort-26/users/me',
     headers: {
-      authorization: '379cd553-b5f6-46c7-ade6-e4556a60f89b',
-      'Content-Type': 'application/json'
+      authorization: '379cd553-b5f6-46c7-ade6-e4556a60f89b'
     }
   }); 
 
