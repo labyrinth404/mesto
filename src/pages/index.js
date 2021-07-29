@@ -80,10 +80,12 @@ validationEditInfo.enableValidation();
 
 
 const api = new Api({
-    url: 'https://nomoreparties.co/v1/cohort-26/users/me',
-    headers: {
-      authorization: '379cd553-b5f6-46c7-ade6-e4556a60f89b'
-    }
+    url: 'https://mesto.nomoreparties.co/v1/cohort-26',
+    headers: { authorization: '379cd553-b5f6-46c7-ade6-e4556a60f89b' }
   }); 
 
-  console.log(api.getInitialCards())
+api.getInitialCards()
+//api.getUserInfo()
+//api.postCard('Конь 2', 'https://images.unsplash.com/photo-1620384560944-98c833a4761a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80')
+//api.deleteCard('6102d96b6b285602e3d3073e')
+//api.putLikeCard('6102d72a6b285602e3d3073a')
