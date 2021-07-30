@@ -19,6 +19,9 @@ export const profileButtonAdd = profileInfo.querySelector('.profile__button-add'
 export const elements = document.querySelector('.elements');
 export const fullImageButtonClose = document.querySelector('.popup-image__button-close');
 export const fullImage = document.querySelector('.popup-image');
+export const popupAvatar = document.querySelector('.popup_type_avatar');
+export const profileAvatar = document.querySelector('.profile__update');
+export const avatar = document.querySelector('.profile__avatar');
 
 
 export const ESC_CODE = "Escape";

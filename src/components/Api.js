@@ -15,10 +15,10 @@ export class Api {
         return fetch(`${this.#url}/cards`, {
             headers: this.#headers
           })
-            .then(res => res.json())
-            .then((result) => {
-              console.log(result);
-            }); 
+            .then((res) => {      
+                if (res.ok) {
+                 return res.json();
+              }})
     }
 
     postCard(name, link){
@@ -58,9 +58,6 @@ export class Api {
             headers: this.#headers
             })
             .then(res => res.json())
-            .then((result) => {
-              console.log(result);
-            }); 
     }
 
     patchUserInfo(name, about){
