@@ -23,8 +23,8 @@
             </button>
             <h2 class="popup__title">Обновить аватар</h2>
             <form name="popupEditInformation" method="post" class="popup__form" novalidate>
-                <input required type="url" value="Ссылка на картинку" class="popup__input" id="mestoUrl" name="mesto-url-form">
-                <span class="popup-error" id="mestoUrl-error"></span>
+                <input required type="url" value="Ссылка на картинку" class="popup__input" id="mestoUrlAvatar" name="mesto-url-form">
+                <span class="popup-error" id="mestoUrlAvatar-error"></span>
                 <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
         </div>
@@ -87,7 +87,7 @@
     <main class="main">
         <section class="profile">
             <img src="<%=require('./images/update.svg')%>" class="profile__update"></img>
-            <img src="<%=require('./images/avatar_kusto.jpg')%>" class="profile__avatar" alt="Аватарка">
+            <img src="<%=require('./images/avatar_kusto.jpg')%>" class="profile__avatar" alt="Аватарка"></img>
             <div class="profile__info">
                 <h1 class="profile__name"></h1>
                 <button type="button" class="profile__button-edit"> 
