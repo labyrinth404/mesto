@@ -7,13 +7,15 @@ export class Card {
     #element
     #handleCardClick
     #owner
+    #myId
     constructor ({ handleCardClick }, cardData, cardSelector) {
         this.#text = cardData.name;
         this.#image = cardData.link;
         this.#likes = cardData.likes;
-        this.#id = cardData.id
-        this.#owner = cardData.owner._id
-        this.#cardSelector = cardSelector
+        this.#id = cardData.id;
+        this.#owner = cardData.owner._id;
+        this.#myId = cardData.myId;
+        this.#cardSelector = cardSelector;
         this.#handleCardClick = handleCardClick;
     }
 
@@ -38,10 +40,13 @@ export class Card {
         this.#element.querySelector('.element__text').textContent = this.#text;
         this.#element.querySelector('.element__image').id = this.#id;
         this.#element.querySelector('.element__count').textContent = this.#likes > 0 ? this.#likes : '';
+ 
+    
         return this.#element
     }
 
     #setEventListener() {
+        this.#hideTrashButton();
         this.#element.querySelector('.element__image').addEventListener('click', () => {
             this.#handleCardClick()});
 
@@ -61,6 +66,11 @@ export class Card {
     #handleTrashClick() {
         this.#element.remove();
         this.#element = null;
+    }
+    #hideTrashButton(){
+        if(this.#owner !== this.#myId){
+            this.#element.querySelector('.element__trash').style.visibility = "hidden"
+        }  
     }
 
 }

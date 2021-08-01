@@ -49,9 +49,9 @@
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="popupEditInformation" method="post" class="popup__form" novalidate>
-                <input required type="text" value="Жак-ив Кусто" class="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40" autocomplete="off">
+                <input required type="text" value="" class="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40" autocomplete="off">
                 <span class="popup-error" id="popupName-error"></span>
-                <input required type="text" value="Иследователь океана" class="popup__input" id="popupDescription" name="popup-description-form" minlength="2" maxlength="200" autocomplete="off">
+                <input required type="text" value="" class="popup__input" id="popupDescription" name="popup-description-form" minlength="2" maxlength="200" autocomplete="off">
                 <span class="popup-error" id="popupDescription-error"></span>
                 <button type="submit" class="popup__button-save">Сохранить</button>
             </form>
@@ -89,11 +89,11 @@
             <img src="<%=require('./images/update.svg')%>" class="profile__update"></img>
             <img src="<%=require('./images/avatar_kusto.jpg')%>" class="profile__avatar" alt="Аватарка">
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <h1 class="profile__name"></h1>
                 <button type="button" class="profile__button-edit"> 
                     <img src="<%=require('./images/edit-button.svg')%>" alt="Редактировать">
                 </button>
-                <p class="profile__description">Исследователь океана</p>
+                <p class="profile__description"></p>
             </div>
             <button type="button" class="profile__button-add">
                 <img src="<%=require('./images/add-button.svg')%>" alt="Добавить">

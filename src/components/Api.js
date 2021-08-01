@@ -19,6 +19,7 @@ export class Api {
                 if (res.ok) {
                  return res.json();
               }})
+            .catch(error => {console.log(error)})
     }
 
     postCard(name, link){
@@ -34,10 +35,7 @@ export class Api {
                 })
             })
             .then(res => res.json())
-            .then((result) => {
-              console.log(result);
-            })
-        
+            .catch(error => {console.log(error)})
     }
 
     deleteCard(cardId){
@@ -48,8 +46,9 @@ export class Api {
             })
             .then(res => res.json())
             .then((result) => {
-            console.log(result);
-        }); 
+                console.log(result)
+            })
+            .catch(error => {console.log(error)})
 
     }
 
@@ -58,6 +57,7 @@ export class Api {
             headers: this.#headers
             })
             .then(res => res.json())
+            .catch(error => {console.log(error)})
     }
 
     patchUserInfo(name, about){
@@ -71,22 +71,21 @@ export class Api {
                 name: this.#name,
                 about: this.#about
             })
+            .catch(error => {console.log(error)})
         }); 
     }
 
     patchUserAvatar(avatar){
         this.#avatar = avatar;
+        this.#headers['Content-Type'] = 'application/json';
         return fetch(`${this.#url}/users/me/avatar`, {
             method: 'PATCH',
             headers: this.#headers,
             body: JSON.stringify({
                 avatar: this.#avatar
             })
-            })
-            .then(res => res.json())
-            .then((result) => {
-                console.log(result);
-            }); 
+            .catch(error => {console.log(error)})
+        });
     }
 
     putLikeCard(cardId){
@@ -94,7 +93,8 @@ export class Api {
         return fetch(`${this.#url}/cards/likes/${this.#cardId}`, {
             method: 'PUT',
             headers: this.#headers
-        }); 
+        })
+        .catch(error => {console.log(error)})
     }
 
     deleteLikeCard(cardId){
@@ -102,6 +102,7 @@ export class Api {
         return fetch(`${this.#url}/cards/likes/${this.#cardId}`, {
             method: 'DELETE',
             headers: this.#headers
-        });
+        })
+        .catch(error => {console.log(error)})
     }
 }
