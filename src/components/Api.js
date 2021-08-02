@@ -19,7 +19,6 @@ export class Api {
                 if (res.ok) {
                  return res.json();
               }})
-            .catch(error => {console.log(error)})
     }
 
     postCard(name, link){
@@ -34,8 +33,7 @@ export class Api {
                 "link": this.#link
                 })
             })
-            .then(res => res.json())
-            .catch(error => {console.log(error)})
+            .then(res => res.json());
     }
 
     deleteCard(cardId){
@@ -44,11 +42,7 @@ export class Api {
             method: 'DELETE',
             headers: this.#headers
             })
-            .then(res => res.json())
-            .then((result) => {
-                console.log(result)
-            })
-            .catch(error => {console.log(error)})
+            .then(res => res.json());
 
     }
 
@@ -56,8 +50,7 @@ export class Api {
         return fetch(`${this.#url}/users/me `, {
             headers: this.#headers
             })
-            .then(res => res.json())
-            .catch(error => {console.log(error)})
+            .then(res => res.json());
     }
 
     patchUserInfo(name, about){
@@ -71,8 +64,8 @@ export class Api {
                 name: this.#name,
                 about: this.#about
             })
-            .catch(error => {console.log(error)})
-        }); 
+        })
+        .then((res) => console.log(res));
     }
 
     patchUserAvatar(avatar){
@@ -84,8 +77,8 @@ export class Api {
             body: JSON.stringify({
                 avatar: this.#avatar
             })
-            .catch(error => {console.log(error)})
-        });
+        })
+        .then(res => res.json());
     }
 
     putLikeCard(cardId){
@@ -94,7 +87,7 @@ export class Api {
             method: 'PUT',
             headers: this.#headers
         })
-        .catch(error => {console.log(error)})
+        .then((res) => console.log(res))
     }
 
     deleteLikeCard(cardId){
@@ -103,6 +96,6 @@ export class Api {
             method: 'DELETE',
             headers: this.#headers
         })
-        .catch(error => {console.log(error)})
+        .then((res) => console.log(res))
     }
 }

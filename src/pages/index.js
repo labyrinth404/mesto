@@ -1,6 +1,7 @@
 import { Card } from '../components/Card.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js'
+import { PopupWithDelete } from '../components/PopupWithDelete.js';
 import { UserInfo } from '../components/UserInfo.js'
 import { FormValidator } from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -9,8 +10,10 @@ import { profilePopup,
     addCardPopup,
     profileButtonEdit,
     profileButtonAdd,
-    avatar,
+    popupAvatar,
     profileAvatar,
+    avatar,
+    count,
     config } from '../utils/constants.js';
     
 import './index.css'; 
@@ -28,16 +31,19 @@ api.getUserInfo()
     //Верхняя часть странички связанная с пользователем.  Уже начал теряться в своем же коде, по этому решил коментить.
 
     //Аватарка
+    avatar.src = data.avatar;
 
     const updateAvatar = new PopupWithForm('.popup_type_avatar', (inputValue) => {
+        
         api.patchUserAvatar(inputValue['mesto-url-form'])
-            .then(() => {
-                console.log(inputValue['mesto-url-form'])
-            })
-            .catch(error => console.log(error))
-            .finally(() =>{
-                updateAvatar.close();
-            });
+        .then(() => {
+            avatar.src = inputValue['mesto-url-form'];
+        })
+        .finally(() => {
+            updateAvatar.close();
+        })
+        
+        
         
     })
     updateAvatar.setEventListeners();
@@ -80,15 +86,44 @@ api.getUserInfo()
 
     //Тут начинается движухка с карточками. 
         function renderCard(item) {
-            const card = new Card({ handleCardClick: () => {
+            const card = new Card({
+                handleCardClick: () => {
                     popupWithImage.open(item);
-                    }
-            },item, '#element');
+                    },
+                handleCardLike: () => {
+                    
+                },
+                
+                handleCardTrash: () => {
+                    const popupDeleteCard = new PopupWithDelete('.popup_type_confirm', {
+                        submit: () => { 
+                            api.deleteCard(item.id)
+                            .then((json) => {
+                                json.message == 'Пост удалён' 
+                                ? card.deleteTrashClick()
+                                : console.log(json.message)
+                            });
+                            popupDeleteCard.close();
+                        }})
+                    popupDeleteCard.open()
+                    popupDeleteCard.setEventListeners()
+                },
+                checkCardLik: () => {
+                    item.likes.forEach((like) => {
+                        console.log(like)
+                        if(like._id === item.myId){
+                            document.querySelector('.element__like').classList.add('element__like_active')
+                        }
+                    })
+                }
+            },item, '#element',  
+         );
             this.addItem(card.generateCard());
         };
     
         const validationCardPopup = new FormValidator(config, addCardPopup);
         const validationEditInfo =  new FormValidator(config, profilePopup);
+        const validationEditAvatar = new FormValidator(config, popupAvatar);
     
         const popupWithImage = new PopupWithImage('.popup-image');
     
@@ -100,7 +135,7 @@ api.getUserInfo()
             const section = new Section({
                 items: res.map(item => ({name: item.name, 
                                         link: item.link, 
-                                        likes: item.likes.length, 
+                                        likes: item.likes, 
                                         id: item._id,
                                         owner: item.owner,
                                         myId: data._id })),
@@ -110,7 +145,7 @@ api.getUserInfo()
             section.renderItems();
         });
     
-    
+  
     
     
         const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {  
@@ -127,11 +162,14 @@ api.getUserInfo()
 
     validationCardPopup.enableValidation();
     validationEditInfo.enableValidation();
+    
 
     profileButtonAdd.addEventListener('click', () => {addCard.open()});
     profileAvatar.addEventListener('click', () => {
         document.querySelector('[name="mesto-url-form"]').value = data.avatar
+        validationEditAvatar.enableValidation();
         updateAvatar.open()
+
     });
 
 });
