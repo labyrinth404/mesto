@@ -15,6 +15,7 @@ export class Card {
     #textSelector
     #likeSelector
     #countSelector
+
     constructor ({ handleCardClick, handleCardLike, handleCardTrash, checkCardLik}, cardData, cardSelector) {
         this.#text = cardData.name;
         this.#image = cardData.link;
@@ -26,8 +27,12 @@ export class Card {
         this.#handleCardClick = handleCardClick;
         this.#handleCardLike = handleCardLike;
         this.#handleCardTrash = handleCardTrash;
-        this.#checkCardLike = checkCardLik
-         
+        this.#checkCardLike = checkCardLik;
+        this.#element = this.#getTemplate();
+        this.#imageSelector = this.#element.querySelector('.element__image');
+        this.#textSelector = this.#element.querySelector('.element__text');
+        this.#likeSelector = this.#element.querySelector('.element__like');
+        this.#countSelector = this.#element.querySelector('.element__count');
     }
 
     #getTemplate() {
@@ -36,19 +41,14 @@ export class Card {
         .content
         .querySelector('.element')
         .cloneNode(true);
-
         
         return cardElement
     }
 
     generateCard() {
-        this.#element = this.#getTemplate();
+        
         this.#setEventListener();
         this.#element.id = this.#owner
-        this.#imageSelector = this.#element.querySelector('.element__image');
-        this.#textSelector = this.#element.querySelector('.element__text');
-        this.#likeSelector = this.#element.querySelector('.element__like');
-        this.#countSelector = this.#element.querySelector('.element__count');
 
         this.#checkCardLike()
         this.#imageSelector.src = this.#image;
@@ -62,14 +62,12 @@ export class Card {
     }
 
     #setEventListener() {
-        debugger
+        
         this.#hideTrashButton();
-        this.#imageSelector.addEventListener('click', () => {
-            this.#handleCardClick()});
-
+        this.#imageSelector.addEventListener('click', () => { this.#handleCardClick() });
         this.#likeSelector.addEventListener('click', () => {
-        this.#handleLikeClick();
-        this.#handleCardLike();
+            this.#handleLikeClick();
+            this.#handleCardLike();
         });
         this.#element.querySelector('.element__trash').addEventListener('click', () => {
             this.#handleCardTrash();
@@ -85,19 +83,17 @@ export class Card {
             this.#likeSelector.classList.remove('element__like_active');
             this.#countSelector.textContent = +this.#countSelector.textContent.textContent - 1;
         }
-
-        
     }
 
     deleteTrashClick() {
         this.#element.remove();
         this.#element = null;
     }
+    
     #hideTrashButton(){
         if(this.#owner !== this.#myId){
             this.#element.querySelector('.element__trash').style.visibility = "hidden"
         }  
     }
-
 }
 
