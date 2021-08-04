@@ -11,6 +11,10 @@ export class Card {
     #owner
     #myId
     #checkCardLike
+    #imageSelector
+    #textSelector
+    #likeSelector
+    #countSelector
     constructor ({ handleCardClick, handleCardLike, handleCardTrash, checkCardLik}, cardData, cardSelector) {
         this.#text = cardData.name;
         this.#image = cardData.link;
@@ -23,6 +27,7 @@ export class Card {
         this.#handleCardLike = handleCardLike;
         this.#handleCardTrash = handleCardTrash;
         this.#checkCardLike = checkCardLik
+         
     }
 
     #getTemplate() {
@@ -40,25 +45,29 @@ export class Card {
         this.#element = this.#getTemplate();
         this.#setEventListener();
         this.#element.id = this.#owner
+        this.#imageSelector = this.#element.querySelector('.element__image');
+        this.#textSelector = this.#element.querySelector('.element__text');
+        this.#likeSelector = this.#element.querySelector('.element__like');
+        this.#countSelector = this.#element.querySelector('.element__count');
 
         this.#checkCardLike()
-        this.#element.querySelector('.element__image').src = this.#image;
-        this.#element.querySelector('.element__image').alt = `Фото(${this.#text})`;
-        this.#element.querySelector('.element__text').textContent = this.#text;
-        this.#element.querySelector('.element__image').id = this.#id;
-        this.#element.querySelector('.element__count').textContent = this.#likes > 0 ? this.#likes : '';
+        this.#imageSelector.src = this.#image;
+        this.#imageSelector.alt = `Фото(${this.#text})`;
+        this.#textSelector.textContent = this.#text;
+        this.#imageSelector.id = this.#id;
+        this.#countSelector.textContent = this.#likes > 0 ? this.#likes : '';
         
- 
     
         return this.#element
     }
 
     #setEventListener() {
+        debugger
         this.#hideTrashButton();
-        this.#element.querySelector('.element__image').addEventListener('click', () => {
+        this.#imageSelector.addEventListener('click', () => {
             this.#handleCardClick()});
 
-        this.#element.querySelector('.element__like').addEventListener('click', () => {
+        this.#likeSelector.addEventListener('click', () => {
         this.#handleLikeClick();
         this.#handleCardLike();
         });
@@ -69,14 +78,12 @@ export class Card {
     }
 
     #handleLikeClick() {
-        if(!this.#element.querySelector('.element__like').classList.contains('element__like_active')) {
-            this.#element.querySelector('.element__like').classList.add('element__like_active');
-            this.#element.querySelector('.element__count')
-            .textContent = +this.#element.querySelector('.element__count').textContent + 1;
+        if(!this.#likeSelector.classList.contains('element__like_active')) {
+            this.#likeSelector.classList.add('element__like_active');
+            this.#countSelector.textContent = +this.#countSelector.textContent.textContent + 1;
         } else {
-            this.#element.querySelector('.element__like').classList.remove('element__like_active');
-            this.#element.querySelector('.element__count')
-            .textContent = +this.#element.querySelector('.element__count').textContent - 1;
+            this.#likeSelector.classList.remove('element__like_active');
+            this.#countSelector.textContent = +this.#countSelector.textContent.textContent - 1;
         }
 
         
