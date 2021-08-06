@@ -25,7 +25,7 @@ export class Api {
         this.#name = name;
         this.#link = link;
         this.#headers['Content-Type'] = 'application/json';
-        fetch(`${this.#url}/cards`, {
+        return fetch(`${this.#url}/cards`, {
             method: 'POST',
             headers: this.#headers,
             body: JSON.stringify({
@@ -87,7 +87,6 @@ export class Api {
             method: 'PUT',
             headers: this.#headers
         })
-        .then((res) => console.log(res))
     }
 
     deleteLikeCard(cardId){
@@ -96,6 +95,5 @@ export class Api {
             method: 'DELETE',
             headers: this.#headers
         })
-        .then((res) => console.log(res))
     }
 }
