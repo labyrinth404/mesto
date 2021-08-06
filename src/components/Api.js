@@ -10,15 +10,19 @@ export class Api {
         this.#url = options.url;
         this.#headers = options.headers;
     }
+
+    #checkResponse(res){
+        if(res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+    }
   
     getInitialCards() {
         return fetch(`${this.#url}/cards`, {
             headers: this.#headers
           })
-            .then((res) => {      
-                if (res.ok) {
-                 return res.json();
-              }})
+            .then(this.#checkResponse);
     }
 
     postCard(name, link){
@@ -33,7 +37,7 @@ export class Api {
                 "link": this.#link
                 })
             })
-            .then(res => res.json());
+            .then(this.#checkResponse);
     }
 
     deleteCard(cardId){
@@ -42,7 +46,7 @@ export class Api {
             method: 'DELETE',
             headers: this.#headers
             })
-            .then(res => res.json());
+            .then(this.#checkResponse);
 
     }
 
@@ -50,7 +54,7 @@ export class Api {
         return fetch(`${this.#url}/users/me `, {
             headers: this.#headers
             })
-            .then(res => res.json());
+            .then(this.#checkResponse);
     }
 
     patchUserInfo(name, about){
@@ -65,7 +69,7 @@ export class Api {
                 about: this.#about
             })
         })
-        .then((res) => console.log(res));
+        .then(this.#checkResponse);
     }
 
     patchUserAvatar(avatar){
@@ -78,7 +82,7 @@ export class Api {
                 avatar: this.#avatar
             })
         })
-        .then(res => res.json());
+        .then(this.#checkResponse);
     }
 
     putLikeCard(cardId){
@@ -87,6 +91,7 @@ export class Api {
             method: 'PUT',
             headers: this.#headers
         })
+        .then(this.#checkResponse);
     }
 
     deleteLikeCard(cardId){
@@ -95,5 +100,6 @@ export class Api {
             method: 'DELETE',
             headers: this.#headers
         })
+        .then(this.#checkResponse);
     }
 }

@@ -33,7 +33,7 @@ export default class Popup {
     }
 
     #handleBeyondPopupClose() {
-        window.addEventListener('click', (evt) => {
+        this.popup.addEventListener('click', (evt) => {
             if (evt.target.classList.contains('popup')) {
                 this.close();
             }

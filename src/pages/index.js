@@ -14,6 +14,8 @@ import { profilePopup,
     profileAvatar,
     avatar,
     count,
+    formUserName,
+    formUserInfo,
     config } from '../utils/constants.js';
     
 import './index.css'; 
@@ -25,28 +27,19 @@ const api = new Api({
   });
 
 
-let dataUser = undefined;
-let section = null;
+let userId = null;
 
-api.getUserInfo()
-  .then((data) => {
-    dataUser = data;
-    
-    })
-    .then(() => { 
-        avatar.src = dataUser.avatar;
-        userInfo.setUserInfo(dataUser.name, dataUser.about);
-    })
+
+
 
 const updateAvatar = new PopupWithForm('.popup_type_avatar', (inputValue) => {
         
     api.patchUserAvatar(inputValue['mesto-url-form'])
     .then(() => {
-        avatar.src = inputValue['mesto-url-form'];
-    })
-    .finally(() => {
+        userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'], inputValue['mesto-url-form']);
         updateAvatar.close();
     })
+    .catch(error => console.log(error));
     
     
     
@@ -56,14 +49,14 @@ updateAvatar.setEventListeners();
 
 //Информация о пользователе
 const userInfo = new UserInfo({ userName: '.profile__name', 
-                                userInfo: '.profile__description'});
-
+                                userInfo: '.profile__description',
+                                userAvatar: '.profile__avatar'});
 
 
 const editProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
     api.patchUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'])
         .then(() => {
-            userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form']);
+            userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'], avatarUser.avatar);
         })
         .catch(error => console.log(error))
         .finally(() => {
@@ -76,9 +69,7 @@ editProfile.setEventListeners()
 //Редактировать информацию о пользователе
 profileButtonEdit.addEventListener('click', () => {
     
-    const popupElement = document.querySelector('.popup__container_profile');
-    const formUserName = popupElement.querySelector('[name="popup-name-form"]');
-    const formUserInfo = popupElement.querySelector('[name="popup-description-form"]');
+   
     
     const userInfoData = userInfo.getUserInfo();
     formUserName.value = userInfoData.user;
@@ -99,7 +90,7 @@ function renderCard(item) {
         handleCardLike: () => {
             const likes = item.likes;
 
-            if(likes.find(like => like._id == dataUser._id) === undefined){
+            if(likes.find(like => like._id == userId) === undefined){
                 api.putLikeCard(item._id)
                 .then((res) => {
                     console.log(res)
@@ -127,58 +118,53 @@ function renderCard(item) {
                 popupDeleteCard.open();
                 popupDeleteCard.setEventListeners();
             }
-        }, {...item, dataUser}, '#element');
-    this.addItem(card.generateCard());
+        }, {...item, userId}, '#element');
+        
+    section.addItem(card.generateCard());
 };
 
-    const validationCardPopup = new FormValidator(config, addCardPopup);
-    const validationEditInfo =  new FormValidator(config, profilePopup);
-    const validationEditAvatar = new FormValidator(config, popupAvatar);
+const validationCardPopup = new FormValidator(config, addCardPopup);
+const validationEditInfo =  new FormValidator(config, profilePopup);
+const validationEditAvatar = new FormValidator(config, popupAvatar);
+const popupWithImage = new PopupWithImage('.popup-image');
 
-    const popupWithImage = new PopupWithImage('.popup-image');
-
-    popupWithImage.setEventListeners()
-        
+popupWithImage.setEventListeners()
 
 
-api.getInitialCards()
-    .then((res) => {                 
-    section = new Section({
-        items: res,
-        renderer: renderCard
-    }, '.elements')
-    section.renderItems();
-});
-
-
+const section = new Section({items: null,
+                             renderer: renderCard
+                            }, '.elements')         
+  
 const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {  
         
     api.postCard(inputValues['mesto-name-form'], inputValues['mesto-url-form'])
     .then((result) => {
-        const newCard = new Section({items: result,
-                                    renderer: renderCard
-                                    }, '.elements')
-        newCard.addItem()
+        section.rendered(renderCard(result));
+        addCard.close();
     })
-    addCard.close();
+    
 
+    
     validationCardPopup.toggleButtonSave();
 });
 
 addCard.setEventListeners()
-        
+
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardsData]) => {
+    userId = userInfo._id;
+    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+    cardsData.forEach(item => section.rendered(renderCard(item)) );
+    });
 
 
 //Слушатели и запуск функций.
 
 validationCardPopup.enableValidation();
 validationEditInfo.enableValidation();
+validationEditAvatar.enableValidation();
 
 
-profileButtonAdd.addEventListener('click', () => {addCard.open()});
-profileAvatar.addEventListener('click', () => {
-    document.querySelector('[name="mesto-url-form"]').value = dataUser.avatar
-    validationEditAvatar.enableValidation();
-    updateAvatar.open()
-
-});
+profileButtonAdd.addEventListener('click', () => { addCard.open() });
+profileAvatar.addEventListener('click', () => { updateAvatar.open() });

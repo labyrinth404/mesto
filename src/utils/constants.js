@@ -24,6 +24,9 @@ export const profileAvatar = document.querySelector('.profile__update');
 export const avatar = document.querySelector('.profile__avatar');
 export const count = document.querySelector('.element__count');
 
+export const formUserName = popupElement.querySelector('[name="popup-name-form"]');
+export const formUserInfo = popupElement.querySelector('[name="popup-description-form"]');
+
 
 export const ESC_CODE = "Escape";
 

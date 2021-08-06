@@ -23,7 +23,7 @@ export class Card {
         this.#likes = cardData.likes;
         this.#id = cardData.id;
         this.#owner = cardData.owner._id;
-        this.#myId = cardData.dataUser._id;
+        this.#myId = cardData.userId;
         this.#cardSelector = cardSelector;
         this.#handleCardClick = handleCardClick;
         this.#handleCardLike = handleCardLike;
