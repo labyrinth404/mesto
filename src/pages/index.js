@@ -12,8 +12,6 @@ import { profilePopup,
     profileButtonAdd,
     popupAvatar,
     profileAvatar,
-    avatar,
-    count,
     formUserName,
     formUserInfo,
     config } from '../utils/constants.js';
@@ -28,7 +26,11 @@ const api = new Api({
 
 
 let userId = null;
+let userInfoData = null;
 
+const userInfo = new UserInfo({ userName: '.profile__name', 
+                                userInfo: '.profile__description',
+                                userAvatar: '.profile__avatar'});
 
 
 
@@ -36,7 +38,7 @@ const updateAvatar = new PopupWithForm('.popup_type_avatar', (inputValue) => {
         
     api.patchUserAvatar(inputValue['mesto-url-form'])
     .then(() => {
-        userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'], inputValue['mesto-url-form']);
+        userInfo.setUserInfo(userInfoData.name, userInfoData.about, inputValue['mesto-url-form']);
         updateAvatar.close();
     })
     .catch(error => console.log(error));
@@ -48,15 +50,13 @@ updateAvatar.setEventListeners();
 
 
 //Информация о пользователе
-const userInfo = new UserInfo({ userName: '.profile__name', 
-                                userInfo: '.profile__description',
-                                userAvatar: '.profile__avatar'});
+
 
 
 const editProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
     api.patchUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'])
         .then(() => {
-            userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'], avatarUser.avatar);
+            userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'], userInfoData.avatar);
         })
         .catch(error => console.log(error))
         .finally(() => {
@@ -68,59 +68,44 @@ editProfile.setEventListeners()
 
 //Редактировать информацию о пользователе
 profileButtonEdit.addEventListener('click', () => {
-    
-   
-    
-    const userInfoData = userInfo.getUserInfo();
-    formUserName.value = userInfoData.user;
-    formUserInfo.value = userInfoData.info;
+    console.log(userInfoData)
+    formUserName.value = userInfoData.name;
+    formUserInfo.value = userInfoData.about;
 
     editProfile.open()
     
     
     });
+// ЗАГРУЗКА (LOADER)
+const renderLoading = (isLoading = true, textButtonDefault = "Сохранение...", form) => {
+    const activeButton = document.querySelector(`${form} .popup__button-save`)
+    if(isLoading){
+            activeButton.textContent = "Сохранение...";
+            return;
+    }else { activeButton.textContent = textButtonDefault}
+}
 
 
 //Тут начинается движухка с карточками. 
-function renderCard(item) {
+function renderCard(item, order) {
     const card = new Card({
         handleCardClick: () => {
             popupWithImage.open(item);
             },
         handleCardLike: () => {
-            const likes = item.likes;
-
-            if(likes.find(like => like._id == userId) === undefined){
-                api.putLikeCard(item._id)
-                .then((res) => {
-                    console.log(res)
-
-                });
-            } else {
-                api.deleteLikeCard(item._id)
-                .then((res) => {
-                    console.log(res)
-                });
-            }
-            
-        },
+            api.changeLikeCard(item._id, card.checkLike())
+                .then(() => {
+                    card.changeLike();
+                    console.log(card.checkLike())
+                })
+                .catch(error => console.log(error))
+            },
         handleCardTrash: () => {
-            const popupDeleteCard = new PopupWithDelete('.popup_type_confirm', {
-                submit: () => { 
-                    api.deleteCard(item._id)
-                    .then((json) => {
-                        json.message == 'Пост удалён' 
-                        ? card.deleteTrashClick()
-                        : console.log(json.message);
-                    });
-                    popupDeleteCard.close();
-                }});
-                popupDeleteCard.open();
-                popupDeleteCard.setEventListeners();
+            popupDeleteCard.open({...item, card});
             }
         }, {...item, userId}, '#element');
         
-    section.addItem(card.generateCard());
+    section.addItem(card.generateCard(), order);
 };
 
 const validationCardPopup = new FormValidator(config, addCardPopup);
@@ -131,32 +116,55 @@ const popupWithImage = new PopupWithImage('.popup-image');
 popupWithImage.setEventListeners()
 
 
+const popupDeleteCard = new PopupWithDelete('.popup_type_confirm', {
+    submit: (item) => { 
+        api.deleteCard(item._id)
+        .then((json) => {
+            json.message == 'Пост удалён' 
+            ? item.card.deleteTrashClick()
+            : console.log(json.message);
+            popupDeleteCard.close();
+        })
+        .catch(error => console.log(error));
+       
+    }});
+popupDeleteCard.setEventListeners();
+
+
 const section = new Section({items: null,
                              renderer: renderCard
                             }, '.elements')         
   
 const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {  
-        
+    
+    
     api.postCard(inputValues['mesto-name-form'], inputValues['mesto-url-form'])
     .then((result) => {
-        section.rendered(renderCard(result));
+        renderLoading(true, 'Сохранение...', '.popup_type_add-card')
+        validationCardPopup.toggleButtonSave();
+        renderCard(result, false);
         addCard.close();
-    })
-    
 
-    
-    validationCardPopup.toggleButtonSave();
+    })
+    .catch(error => console.log(error))
+    .finally(()=> {
+        renderLoading(false, 'Создать', '.popup_type_add-card')
+    });
 });
 
 addCard.setEventListeners()
 
 
+
+
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
-    userId = userInfo._id;
+    userId = userData._id;
+    userInfoData = userData;
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
-    cardsData.forEach(item => section.rendered(renderCard(item)) );
-    });
+    cardsData.forEach((item) => { renderCard(item, true) });
+    })
+    .catch(error => console.log(error));
 
 
 //Слушатели и запуск функций.
@@ -166,5 +174,8 @@ validationEditInfo.enableValidation();
 validationEditAvatar.enableValidation();
 
 
-profileButtonAdd.addEventListener('click', () => { addCard.open() });
+profileButtonAdd.addEventListener('click', () => { 
+    renderLoading(false, 'Создать', '.popup_type_add-card');
+    addCard.open() 
+});
 profileAvatar.addEventListener('click', () => { updateAvatar.open() });

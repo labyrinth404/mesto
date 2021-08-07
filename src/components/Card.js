@@ -17,7 +17,6 @@ export class Card {
     #trashSelector
 
     constructor ({ handleCardClick, handleCardLike, handleCardTrash, }, cardData, cardSelector) {
-        
         this.#text = cardData.name;
         this.#image = cardData.link;
         this.#likes = cardData.likes;
@@ -55,8 +54,7 @@ export class Card {
         this.#textSelector.textContent = this.#text;
         this.#imageSelector.id = this.#id;
         this.#countSelector.textContent = this.#likes.length;
-
-        if(this.#likes.find(like => like._id == this.#myId) !== undefined) {
+        if(this.checkLike()) {
             this.#likeSelector.classList.add('element__like_active');
         }
         
@@ -68,24 +66,29 @@ export class Card {
         
         this.#hideTrashButton();
 
-        this.#imageSelector.addEventListener('click', () => { this.#handleCardClick() });
-        this.#likeSelector.addEventListener('click', () => { 
-            this.#handleCardLike();
-            this.#handleLikeClick();
-         });
-        this.#trashSelector.addEventListener('click', () => { this.#handleCardTrash() });
-
+        this.#imageSelector.addEventListener('click', () => { this.#handleCardClick(this) });
+        this.#likeSelector.addEventListener('click', () => { this.#handleCardLike(this) });
+        this.#trashSelector.addEventListener('click', () => {this.#handleCardTrash(this) });
+      
     }
 
-    #handleLikeClick() {
-        
-        if(this.#likes.find(like => like._id == this.#myId) !== undefined) {
+    checkLike() {
+        return this.#likes.find(like => like._id === this.#myId) !== undefined;
+    }
+
+    deactiveLike(){
+    }
+
+    changeLike() {
+        if(this.checkLike()){
             this.#likeSelector.classList.remove('element__like_active');
-            this.#countSelector.textContent = +this.#countSelector.textContent - 1;
+            this.#countSelector.textContent = +this.#countSelector.textContent - 1; 
         } else {
             this.#likeSelector.classList.add('element__like_active');
-            this.#countSelector.textContent = +this.#countSelector.textContent + 1;
-        }
+            this.#countSelector.textContent = +this.#countSelector.textContent + 1; 
+        }                 
+
+
     }
 
     deleteTrashClick() {

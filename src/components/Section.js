@@ -14,7 +14,11 @@ export default class Section {
         });
     }
 
-    addItem(element) {
-        this.#container.append(element);
+    addItem(element, order = false) {
+        if(order) {
+            this.#container.append(element);
+        } else {
+            this.#container.prepend(element)
+        }
     }
 }
