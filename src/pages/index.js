@@ -48,11 +48,6 @@ const updateAvatar = new PopupWithForm('.popup_type_avatar', (inputValue) => {
 })
 updateAvatar.setEventListeners();
 
-
-//Информация о пользователе
-
-
-
 const editProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
     api.patchUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'])
         .then(() => {
@@ -68,7 +63,6 @@ editProfile.setEventListeners()
 
 //Редактировать информацию о пользователе
 profileButtonEdit.addEventListener('click', () => {
-    console.log(userInfoData)
     formUserName.value = userInfoData.name;
     formUserInfo.value = userInfoData.about;
 
@@ -86,6 +80,15 @@ const renderLoading = (isLoading = true, textButtonDefault = "Сохранени
 }
 
 
+function postCardClick(item, card) {
+    api.changeLikeCard(item._id, card.checkLike())
+    .then((data) => {
+        card.changeLike(data);
+    })
+    .catch(error => console.log(error))
+}
+
+
 //Тут начинается движухка с карточками. 
 function renderCard(item, order) {
     const card = new Card({
@@ -93,12 +96,7 @@ function renderCard(item, order) {
             popupWithImage.open(item);
             },
         handleCardLike: () => {
-            api.changeLikeCard(item._id, card.checkLike())
-                .then(() => {
-                    card.changeLike();
-                    console.log(card.checkLike())
-                })
-                .catch(error => console.log(error))
+            postCardClick(item, card)
             },
         handleCardTrash: () => {
             popupDeleteCard.open({...item, card});

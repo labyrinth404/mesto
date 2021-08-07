@@ -73,21 +73,20 @@ export class Card {
     }
 
     checkLike() {
-        return this.#likes.find(like => like._id === this.#myId) !== undefined;
+        return Boolean(this.#likes.find(like => like._id === this.#myId) !== undefined);
     }
 
     deactiveLike(){
     }
 
-    changeLike() {
+    changeLike(data) {
+        this.#countSelector.textContent = data.likes.length;
         if(this.checkLike()){
-            this.#likeSelector.classList.remove('element__like_active');
-            this.#countSelector.textContent = +this.#countSelector.textContent - 1; 
+            this.#likeSelector.classList.remove('element__like_active'); 
         } else {
             this.#likeSelector.classList.add('element__like_active');
-            this.#countSelector.textContent = +this.#countSelector.textContent + 1; 
         }                 
-
+        this.#likes = data.likes;
 
     }
 
