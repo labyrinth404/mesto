@@ -35,27 +35,34 @@ const userInfo = new UserInfo({ userName: '.profile__name',
 
 
 const updateAvatar = new PopupWithForm('.popup_type_avatar', (inputValue) => {
-        
+    const activeButton = document.querySelector('.popup_type_avatar .popup__button-save');
+    renderLoading(true, activeButton)
+
     api.patchUserAvatar(inputValue['mesto-url-form'])
     .then(() => {
         userInfo.setUserInfo(userInfoData.name, userInfoData.about, inputValue['mesto-url-form']);
         updateAvatar.close();
     })
-    .catch(error => console.log(error));
-    
-    
-    
-})
+    .catch(error => console.log(error))
+    .finally(() => {
+        renderLoading(false, activeButton);
+    })
+});
+
 updateAvatar.setEventListeners();
 
 const editProfile = new PopupWithForm('.popup_type_profile', (inputValues) => {
+    const activeButton = document.querySelector('.popup_type_profile .popup__button-save');
+    renderLoading(true, activeButton);
+
     api.patchUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'])
         .then(() => {
             userInfo.setUserInfo(inputValues['popup-name-form'], inputValues['popup-description-form'], userInfoData.avatar);
+            editProfile.close();
         })
         .catch(error => console.log(error))
         .finally(() => {
-            editProfile.close();
+            renderLoading(false, activeButton);
         });
 });
 editProfile.setEventListeners()
@@ -67,16 +74,15 @@ profileButtonEdit.addEventListener('click', () => {
     formUserInfo.value = userInfoData.about;
 
     editProfile.open()
-    
-    
     });
+    
 // ЗАГРУЗКА (LOADER)
-const renderLoading = (isLoading = true, textButtonDefault = "Сохранение...", form) => {
-    const activeButton = document.querySelector(`${form} .popup__button-save`)
+const renderLoading = (isLoading = true, activeButton, textButtonDefault = "Сохранить") => {
     if(isLoading){
             activeButton.textContent = "Сохранение...";
             return;
-    }else { activeButton.textContent = textButtonDefault}
+    }
+    activeButton.textContent = textButtonDefault
 }
 
 
@@ -134,19 +140,18 @@ const section = new Section({items: null,
                             }, '.elements')         
   
 const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {  
-    
-    
+    const activeButton = document.querySelector('.popup_type_add-card .popup__button-save');
+    renderLoading(true, activeButton)
+
     api.postCard(inputValues['mesto-name-form'], inputValues['mesto-url-form'])
     .then((result) => {
-        renderLoading(true, 'Сохранение...', '.popup_type_add-card')
         validationCardPopup.toggleButtonSave();
         renderCard(result, false);
         addCard.close();
-
     })
     .catch(error => console.log(error))
     .finally(()=> {
-        renderLoading(false, 'Создать', '.popup_type_add-card')
+        renderLoading(false, activeButton, 'Создать')
     });
 });
 
@@ -172,8 +177,5 @@ validationEditInfo.enableValidation();
 validationEditAvatar.enableValidation();
 
 
-profileButtonAdd.addEventListener('click', () => { 
-    renderLoading(false, 'Создать', '.popup_type_add-card');
-    addCard.open() 
-});
+profileButtonAdd.addEventListener('click', () => { addCard.open() });
 profileAvatar.addEventListener('click', () => { updateAvatar.open() });
