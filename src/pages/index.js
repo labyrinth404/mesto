@@ -70,8 +70,10 @@ editProfile.setEventListeners()
 
 //Редактировать информацию о пользователе
 profileButtonEdit.addEventListener('click', () => {
-    formUserName.value = userInfoData.name;
-    formUserInfo.value = userInfoData.about;
+    validationEditInfo.toggleButtonSave();
+    
+    formUserName.value = userInfo.getUserInfo().user;
+    formUserInfo.value = userInfo.getUserInfo().info;
 
     editProfile.open()
     });
@@ -142,10 +144,8 @@ const section = new Section({items: null,
 const addCard = new PopupWithForm('.popup_type_add-card', (inputValues) => {  
     const activeButton = document.querySelector('.popup_type_add-card .popup__button-save');
     renderLoading(true, activeButton)
-
     api.postCard(inputValues['mesto-name-form'], inputValues['mesto-url-form'])
     .then((result) => {
-        validationCardPopup.toggleButtonSave();
         renderCard(result, false);
         addCard.close();
     })
@@ -165,7 +165,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userId = userData._id;
     userInfoData = userData;
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
-    cardsData.forEach((item) => { renderCard(item, true) });
+    //cardsData.forEach((item) => { renderCard(item, true) });
+    section.renderItems(cardsData, true)
     })
     .catch(error => console.log(error));
 
@@ -177,5 +178,12 @@ validationEditInfo.enableValidation();
 validationEditAvatar.enableValidation();
 
 
-profileButtonAdd.addEventListener('click', () => { addCard.open() });
-profileAvatar.addEventListener('click', () => { updateAvatar.open() });
+profileButtonAdd.addEventListener('click', () => { 
+    validationCardPopup.toggleButtonSave();
+    addCard.open() 
+});
+
+profileAvatar.addEventListener('click', () => { 
+    validationEditAvatar.toggleButtonSave();
+    updateAvatar.open() 
+});
